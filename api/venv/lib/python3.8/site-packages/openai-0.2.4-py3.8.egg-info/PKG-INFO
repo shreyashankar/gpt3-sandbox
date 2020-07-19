@@ -1,0 +1,11 @@
+Metadata-Version: 1.2
+Name: openai
+Version: 0.2.4
+Summary: Python client library for the OpenAI API
+Home-page: https://github.com/openai/openai-python
+Author: OpenAI
+Author-email: support@openai.com
+License: UNKNOWN
+Description: UNKNOWN
+Platform: UNKNOWN
+Requires-Python: >=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*
