@@ -9,7 +9,7 @@ The goal of this project is to enable users to create cool web demos with their 
 1. Automatically formatting a user's inputs and outputs so that the model can effectively pattern-match
 2. Creating a web app for a user to deploy locally and showcase their idea
 
-Here's a quick example:
+Here's a quick example of priming GPT to convert English to LaTeX:
 
 ```
 # Construct GPT object and show some examples
