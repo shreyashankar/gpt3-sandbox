@@ -1,3 +1,5 @@
+import openai
+
 class Example():
     def __init__(self, inp, out):
         self.input = inp
@@ -15,6 +17,9 @@ class GPT:
         self.engine=engine
         self.temperature=temperature
         self.max_tokens=max_tokens
+
+    def set_openai_key(self, key):
+        openai.api_key=key
 
     def add_example(self, ex):
         assert isinstance(ex, Example), "Please create an Example object."
@@ -34,3 +39,14 @@ class GPT:
 
     def craft_query(self, prompt):
         return self.get_prime_text() + "input: " + prompt + "\n"
+
+    def submit_request(self, prompt):
+        response = openai.Completion.create(engine=self.get_engine(),
+                                        prompt=self.craft_query(prompt),
+                                        max_tokens=self.get_max_tokens(),
+                                        temperature=self.get_temperature(),
+                                        top_p=1,
+                                        n=1,
+                                        stream=False,
+                                        stop="\ninput:")
+        return response 
