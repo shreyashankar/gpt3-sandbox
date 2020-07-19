@@ -8,7 +8,7 @@ class Example():
         self.output = out
     
     def format(self):
-        return f"English: {self.input}\nLaTeX: {self.output}\n"
+        return f"input: {self.input}\noutput: {self.output}\n"
 
 class GPT:
 
@@ -30,7 +30,7 @@ class GPT:
         def translate():
             prompt = request.json['prompt']
             openai.api_key = app.config['OPENAI_KEY'] 
-            query = prime_text + "English: " + prompt + "\n"
+            query = prime_text + "input: " + prompt + "\n"
             response = openai.Completion.create(engine="davinci",
                                                 prompt=query,
                                                 max_tokens=100,
@@ -38,8 +38,8 @@ class GPT:
                                                 top_p=1,
                                                 n=1,
                                                 stream=False,
-                                                stop="\nEnglish:")
-            return {'text':response['choices'][0]['text']}
+                                                stop="\ninput:")                                 
+            return {'text':response['choices'][0]['text'][7:]}
         
         app.run()
 
