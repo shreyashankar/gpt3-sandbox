@@ -34,7 +34,6 @@ class App extends React.Component {
 
     axios.post(url, d).then((res) => {
       let str = res.data.text;
-      console.log(str)
       this.setState({latexStr: '$' + str.substring(6) + '$'});
     });
   }
