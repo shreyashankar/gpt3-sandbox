@@ -1,15 +1,10 @@
 import React from 'react';
 import {Form, Button} from 'react-bootstrap';
-import Latex from 'react-latex-next';
 import axios from 'axios';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'katex/dist/katex.min.css';
 
 class App extends React.Component {
-
-  // buttonText, placeholder, description text
-  // get rid of Katex
 
   constructor(props) {
     super(props);
@@ -60,7 +55,7 @@ class App extends React.Component {
           <div style={{'margin': 'auto', 'marginTop': '80px', 'display': 'block', 'maxWidth': '500px', 'minWidth': '200px', 'width': '50%'}}>
             <Form onSubmit={this.handleClick}>
               <Form.Group controlId="formBasicEmail">
-                <Form.Label>{this.state.description}</Form.Label>
+                <Form.Label >{this.state.description}</Form.Label>
                 <Form.Control type="text" as='textarea' value={this.state.input} onChange={this.handleChange}/>
               </Form.Group>
 
@@ -68,8 +63,8 @@ class App extends React.Component {
                 {this.state.buttonText}
               </Button>
             </Form>
-            <div style={{'margin': 'auto', 'textAlign': 'center', 'margin': '20px'}}>
-              <Latex>{this.state.output}</Latex>
+            <div style={{'margin': 'auto', 'textAlign': 'center', 'margin': '20px', 'fontSize': '18pt'}}>
+              {this.state.output}
             </div>
           </div>
         </body>
