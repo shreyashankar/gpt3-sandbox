@@ -1,17 +1,49 @@
-# GPT-3 Priming Tool
+# GPT-3 sandbox: from idea to demo in a few minutes
 
 Authors: shreyashankar, bora-uyumazturk
 Initial release date: 19 July 2020
 
 ## Description
 
-This project includes backend and web tools to make it simple to experiment and create a web app demo with the OpenAI GPT-3 API. You can locally launch a web app to demo your GPT-3 idea by writing a simple Python script.
+GPT-3 (Brown et. al) is OpenAI's latest language model. There's a lot it can do, but one of the biggest pain points is in "priming," or seeding, the model with some inputs such that the model can intelligently create new outputs.
 
-The backend is in Flask, and the frontend is in React.
+Many people have ideas for GPT-3 but struggle to make them work, since priming is a new paradigm of machine learning. Additionally, it takes a nontrivial amount of web development to spin up a demo to showcase a cool idea.
+
+The goal of this project is to enable users to create cool web demos with their GPT-3 ideas by *only writing a few lines of Python.* This project addresses the following issues:
+
+1. Automatically formatting a user's inputs and outputs so that the model can effectively pattern-match
+2. Creating a web app for a user to deploy locally and showcase their idea
+
+Here's a quick example:
+
+```
+# Construct GPT object and show some examples
+gpt = GPT(engine="davinci",
+          temperature=0.5,
+          max_tokens=100)
+gpt.add_example(Example('Two plus two equals four', '2 + 2 = 4'))
+gpt.add_example(Example('The integral from zero to infinity', '\\int_0^{\\infty}'))
+gpt.add_example(Example('The gradient of x squared plus two times x with respect to x', '\\nabla_x x^2 + 2x'))
+gpt.add_example(Example('The log of two times x', '\\log{2x}'))
+gpt.add_example(Example('x squared plus y squared plus equals z squared', 'x^2 + y^2 = z^2'))
+
+# Define UI configuration
+config = UIConfig(description="Text to equation",
+                  buttonText="Translate",
+                  placeholder="x squared plus 2 times x")
+
+demo_web_app(gpt, config)
+```
+
+Running this code as a python script would automatically launch a web app for you to test new inputs and outputs with.
+
+Technical details: the backend is in Flask, and the frontend is in React.
 
 ## Requirements
 
-* API keys from the OpenAI API beta invite
+Coding-wise, you only need Python. But for the app to run, you will need:
+
+* API key from the OpenAI API beta invite
 * Python 3
 * `yarn`
 
