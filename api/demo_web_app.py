@@ -9,8 +9,9 @@ KEY_NAME = "OPENAI_KEY"
 
 def demo_web_app(gpt, config=UIConfig()):
     app = Flask(__name__)
-    app.config.from_envvar(CONFIG_VAR)
     CORS(app)
+
+    app.config.from_envvar(CONFIG_VAR)
     gpt.set_openai_key(app.config[KEY_NAME])
 
     @app.route("/params", methods=['GET'])
