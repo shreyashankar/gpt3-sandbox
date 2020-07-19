@@ -6,11 +6,15 @@ import openai
 
 from .UIConfig import UIConfig
 
+CONFIG_VAR = "OPENAI_CONFIG"
+KEY_NAME = "OPENAI_KEY"
+
 def demo_web_app(gpt, config=UIConfig()):
     app = Flask(__name__)
-    app.config.from_envvar('LATEX_TRANSLATOR_CONFIG')
     CORS(app)
-    gpt.set_openai_key(app.config['OPENAI_KEY'])
+
+    app.config.from_envvar(CONFIG_VAR)
+    gpt.set_openai_key(app.config[KEY_NAME])
 
     @app.route("/params", methods=['GET'])
     def get_params():
