@@ -1,9 +1,8 @@
 import os, sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 
-from api.demo_web_app import demo_web_app
-from api.GPT import GPT, Example
-from api.UIConfig import UIConfig
+from api import demo_web_app
+from api import GPT, Example, UIConfig
 
 # Construct GPT object and show some examples
 gpt = GPT(engine="davinci",
