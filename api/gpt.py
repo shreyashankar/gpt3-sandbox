@@ -14,6 +14,11 @@ class GPT:
 
     def __init__(self):
         self.examples = []
+        self.params = {
+            'placeholder': 'x squared plus two times x',
+            'buttonText': 'Submit',
+            'description': 'Equation description'
+        }
 
     def add_example(self, ex):
         assert isinstance(ex, Example), "Please create an Example object."
@@ -25,6 +30,10 @@ class GPT:
         app = Flask(__name__)
         app.config.from_envvar('LATEX_TRANSLATOR_CONFIG')
         CORS(app)
+
+        @app.route("/params", methods=['GET'])
+        def params():
+            return self.params
 
         @app.route("/translate", methods=['GET', 'POST'])
         def translate():
