@@ -50,3 +50,7 @@ class GPT:
                                         stream=False,
                                         stop="\ninput:")
         return response 
+
+    def get_top_reply(self, prompt):
+        response = self.submit_request(prompt)
+        return response['choices'][0]['text'][7:]

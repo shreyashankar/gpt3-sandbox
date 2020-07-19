@@ -66,7 +66,23 @@ To verify that your environment is set up properly, navigate to one of the scrip
 
 A new tab should pop up in your browser, and you should be able to interact with the UI! To stop this app, run ctrl-c or command-c in your terminal.
 
-## Quickstart
+## Experiment with Priming
+
+Using the GPT and Example classes, you can easily see how GPT improves with more priming examples. Here is an example of us opening it in the python interpreter in testing it incrementally:
+
+```
+>>> from api.GPT import GPT, Example
+>>> gpt = GPT()
+>>> gpt.set_openai_key(key)
+>>> prompt = "integral from a to b of f of x"
+>>> gpt.get_top_reply(prompt)
+'er words, a sum is the same as an integral. This is a good\n\nconvention to use, because it means that when you are given a sum,\n\nyou can usually just treat it as an integral.\n\nThe definition of a difference is similar:\n\ndifference: integral from a to b of f of x minus integral from a to b of f of x\n\nNote that the order of the integrals is important. The first integral\n\n'
+>>> gpt.add_example(Example("Two plus two equals four", "2 + 2 = 4"))
+>>> gpt.get_top_reply(prompt)
+' integral from a to b of f of x\n'
+>>> gpt.add_example(Example('The integral from zero to infinity', '\\int_0^{\\infty}'))
+' \\int_a^b f(x) dx\n'
+``` 
 
 ## Contributions
 
