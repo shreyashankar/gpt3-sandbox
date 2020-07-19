@@ -1,0 +1,15 @@
+certifi==2020.6.20
+chardet==3.0.4
+click==7.1.2
+Flask==1.1.2
+Flask-Cors==3.0.8
+idna==2.10
+itsdangerous==1.1.0
+Jinja2==2.11.2
+MarkupSafe==1.1.1
+openai==0.2.4
+python-dotenv==0.14.0
+requests==2.24.0
+six==1.15.0
+urllib3==1.25.9
+Werkzeug==1.0.1
