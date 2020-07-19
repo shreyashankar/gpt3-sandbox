@@ -3,7 +3,9 @@ from api.GPT import GPT, Example
 from api.UIConfig import UIConfig
 
 # prime GPT
-gpt = GPT()
+gpt = GPT(engine="davinci",
+          temperature=0.5,
+          max_tokens=100)
 gpt.add_example(Example('Two plus two equals four', '2 + 2 = 4'))
 gpt.add_example(Example('The integral from zero to infinity', '\\int_0^{\\infty}'))
 gpt.add_example(Example('The gradient of x squared plus two times x with respect to x', '\\nabla_x x^2 + 2x'))

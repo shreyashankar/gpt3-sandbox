@@ -8,8 +8,13 @@ class Example():
 
 class GPT:
 
-    def __init__(self):
+    def __init__(self, engine='davinci',
+                       temperature=0.5,
+                       max_tokens=100):
         self.examples = []
+        self.engine=engine
+        self.temperature=temperature
+        self.max_tokens=max_tokens
 
     def add_example(self, ex):
         assert isinstance(ex, Example), "Please create an Example object."
@@ -17,3 +22,15 @@ class GPT:
     
     def get_prime_text(self):
         return '\n'.join(self.examples) + '\n'
+
+    def get_engine(self):
+        return self.engine
+
+    def get_temperature(self):
+        return self.temperature
+
+    def get_max_tokens(self):
+        return self.max_tokens
+
+    def craft_query(self, prompt):
+        return self.get_prime_text() + "input: " + prompt + "\n"
