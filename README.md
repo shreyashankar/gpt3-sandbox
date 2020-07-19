@@ -75,14 +75,18 @@ The real power of GPT-3 is in its ability to learn to specialize to tasks given 
 >>> gpt = GPT()
 >>> gpt.set_openai_key(key)
 >>> prompt = "integral from a to b of f of x"
->>> gpt.get_top_reply(prompt)
-'er words, a sum is the same as an integral. This is a good\n\nconvention to use, because it means that when you are given a sum,\n\nyou can usually just treat it as an integral.\n\nThe definition of a difference is similar:\n\ndifference: integral from a to b of f of x minus integral from a to b of f of x\n\nNote that the order of the integrals is important. The first integral\n\n'
+>>> print(gpt.get_top_reply(prompt))
+
+output: integral from at to be of f of x
+
 >>> gpt.add_example(Example("Two plus two equals four", "2 + 2 = 4"))
 >>> gpt.get_top_reply(prompt)
-' integral from a to b of f of x\n'
+output:
+
 >>> gpt.add_example(Example('The integral from zero to infinity', '\\int_0^{\\infty}'))
 >>> gpt.get_top_reply(prompt)
-' \\int_a^b f(x) dx\n'
+output: \int_a^b f(x) dx
+
 ``` 
 
 ## Contributions
