@@ -1,13 +1,11 @@
-# GPT-3 sandbox: from idea to demo in a few minutes
+# GPT-3 Sandbox: From idea to demo in a matter of minutes
 
 Authors: shreyashankar, bora-uyumazturk
 Initial release date: 19 July 2020
 
 ## Description
 
-GPT-3 (Brown et. al) is OpenAI's latest language model. There's a lot it can do, but one of the biggest pain points is in "priming," or seeding, the model with some inputs such that the model can intelligently create new outputs.
-
-Many people have ideas for GPT-3 but struggle to make them work, since priming is a new paradigm of machine learning. Additionally, it takes a nontrivial amount of web development to spin up a demo to showcase a cool idea.
+GPT-3 ([Brown et. al](https://arxiv.org/abs/2005.14165)) is OpenAI's latest language model. There's a [lot](https://twitter.com/sharifshameem/status/1282676454690451457) [it](https://twitter.com/jsngr/status/1284511080715362304?s=20) [can](https://twitter.com/paraschopra/status/1284801028676653060?s=20) [do](https://www.gwern.net/GPT-3), but one of the biggest pain points is in "priming," or seeding, the model with some inputs such that the model can intelligently create new outputs. Many people have ideas for GPT-3 but struggle to make them work, since priming is a new paradigm of machine learning. Additionally, it takes a nontrivial amount of web development to spin up a demo to showcase a cool idea.
 
 The goal of this project is to enable users to create cool web demos with their GPT-3 ideas by *only writing a few lines of Python.* This project addresses the following issues:
 
