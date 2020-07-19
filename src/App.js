@@ -42,7 +42,7 @@ class App extends React.Component {
 
     axios.post(url, d).then((res) => {
       let str = res.data.text;
-      this.setState({output: '$' + str + '$'});
+      this.setState({output: str});
     });
   }
 
