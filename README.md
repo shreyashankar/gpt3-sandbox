@@ -68,15 +68,14 @@ A new tab should pop up in your browser, and you should be able to interact with
 
 ## Interactive Priming
 
-The real power of GPT-3 is in its ability to learn to specialize to tasks given a few examples. However, priming can at times be more than an art than a science. Using the GPT and Example classes, you can easily experiment with different priming examples and immediately see their GPT on GPT-3's performance. Below is an example showing it improve incrementally at translating English to LaTeX as we feed it more example in the python interpreter: 
+The real power of GPT-3 is in its ability to learn to specialize to tasks given a few examples. However, priming can at times be more than an art than a science. Using the GPT and Example classes, you can easily experiment with different priming examples and immediately see their GPT on GPT-3's performance. Below is an example showing it improve incrementally at translating English to LaTeX as we feed it more examples in the python interpreter: 
 
 ```
 >>> from api.GPT import GPT, Example
 >>> gpt = GPT()
 >>> gpt.set_openai_key(key)
 >>> prompt = "integral from a to b of f of x"
->>> print(gpt.get_top_reply(prompt))
-
+>>> gpt.get_top_reply(prompt)
 output: integral from at to be of f of x
 
 >>> gpt.add_example(Example("Two plus two equals four", "2 + 2 = 4"))
