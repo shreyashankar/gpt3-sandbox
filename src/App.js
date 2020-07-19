@@ -15,8 +15,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       latexStr: '',
-      value: 'x squared plus two times x'
-    };
+      value: 'x squared plus two times x' };
 
     this.primeText = `English: Two plus two equals four\nLaTeX: 2 + 2 = 4\n\nEnglish: The integral from zero to infinity\nLaTeX: \\int_0^{\\infty}\n\nEnglish: The gradient of x squared plus two times x with respect to x\nLaTeX: \\nabla_x x^2 + 2x\n\nEnglish: The log of two times x\nLaTeX: \\log{2x}\n\nEnglish: x squared plus y squared plus equals z squared\nLaTeX: x^2 + y^2 = z^2\n\nEnglish: The sum from zero to twelve of i squared\nLaTeX: \\sum_{i=0}^{12} i^2\n\nEnglish: E equals m times c squared\nLaTeX: E = mc^2\n\nEnglish: H naught of t\nLaTeX: H_0(t)\n\nEnglish: f of n equals 1 over (b-a) if n is 0 otherwise 5\nLaTeX: f(n) = \\begin{cases} 1/(b-a) &\\mbox{if } n \\equiv 0 \\\
     5 \\end{cases}\n\n`;
@@ -32,7 +31,7 @@ class App extends React.Component {
 
   handleClick(e) {
     e.preventDefault();
-    const url = 'https://api.openai.com/v1/engines/davinci/completions';
+    const url = 'http://127.0.0.1:5000/translate'
 
     let d = {
       "prompt": this.primeText + 'English: ' + this.state.value + '\n',
@@ -45,15 +44,9 @@ class App extends React.Component {
       "stop": "\nEnglish:"
     }
 
-    console.log(d.prompt)
-
-    axios.post(url, d, {
-      headers: {
-        'Authorization': SECRET_KEY,
-        'Content-Type': 'application/json',
-      },
-    }).then((res) => {
-      let str = res.data.choices[0].text;
+    axios.post(url, d).then((res) => {
+      let str = res.data.text;
+      console.log(str)
       this.setState({latexStr: '$' + str.substring(6) + '$'});
     });
   }
