@@ -1,7 +1,6 @@
 import subprocess
 
 from flask import Flask, request, jsonify
-from flask_cors import CORS
 import openai
 
 from .UIConfig import UIConfig
@@ -11,7 +10,6 @@ KEY_NAME = "OPENAI_KEY"
 
 def demo_web_app(gpt, config=UIConfig()):
     app = Flask(__name__)
-    CORS(app)
 
     app.config.from_envvar(CONFIG_VAR)
     gpt.set_openai_key(app.config[KEY_NAME])
