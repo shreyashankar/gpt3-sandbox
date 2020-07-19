@@ -26,7 +26,7 @@ def demo_web_app(gpt, config=UIConfig()):
 
     @app.route("/params", methods=['GET'])
     def get_params():
-        response = config.to_dict()
+        response = config.json()
         return response
 
     @app.route("/translate", methods=['GET', 'POST'])

@@ -7,7 +7,7 @@ class UIConfig():
         self.buttonText = buttonText
         self.placeholder = placeholder
 
-    def to_dict(self):
+    def json(self):
         return {"description": self.description,
                 "buttonText": self.buttonText,
                 "placeholder": self.placeholder}
