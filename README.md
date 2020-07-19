@@ -4,7 +4,9 @@ Initial release date: 19 July 2020
 
 ## Description
 
-The goal of this project is to enable users to create cool web demos with their GPT-3 ideas **with just a few lines of Python.** This project addresses the following issues:
+The goal of this project is to enable users to create cool web demos with their GPT-3 ideas **with just a few lines of Python.** 
+
+This project addresses the following issues:
 
 1. Automatically formatting a user's inputs and outputs so that the model can effectively pattern-match
 2. Creating a web app for a user to deploy locally and showcase their idea
