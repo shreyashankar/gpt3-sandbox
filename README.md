@@ -66,9 +66,9 @@ To verify that your environment is set up properly, navigate to one of the scrip
 
 A new tab should pop up in your browser, and you should be able to interact with the UI! To stop this app, run ctrl-c or command-c in your terminal.
 
-## Experiment with Priming
+## Interactive Priming
 
-Using the GPT and Example classes, you can easily see how GPT improves with more priming examples. Here is an example of us opening it in the python interpreter in testing it incrementally:
+The real power of GPT-3 is in its ability to learn to specialize to tasks given a few examples. However, priming can at times be more than an art than a science. Using the GPT and Example classes, you can easily see how GPT improves with more priming examples. Here is an example of us opening it in the python interpreter in testing it incrementally:
 
 ```
 >>> from api.GPT import GPT, Example
@@ -81,6 +81,7 @@ Using the GPT and Example classes, you can easily see how GPT improves with more
 >>> gpt.get_top_reply(prompt)
 ' integral from a to b of f of x\n'
 >>> gpt.add_example(Example('The integral from zero to infinity', '\\int_0^{\\infty}'))
+>>> gpt.get_top_reply(prompt)
 ' \\int_a^b f(x) dx\n'
 ``` 
 
