@@ -7,8 +7,6 @@ import 'katex/dist/katex.min.css'
 import Latex from 'react-latex-next'
 import axios from 'axios'
 
-const SECRET_KEY = process.env.REACT_APP_SECRET_KEY;
-
 class App extends React.Component {
 
   constructor(props) {
@@ -31,17 +29,10 @@ class App extends React.Component {
 
   handleClick(e) {
     e.preventDefault();
-    const url = 'http://127.0.0.1:5000/translate'
+    const url = '/translate'
 
     let d = {
-      "prompt": this.primeText + 'English: ' + this.state.value + '\n',
-      "max_tokens": 100,
-      "temperature": 0.5,
-      "top_p": 1,
-      "n": 1,
-      "stream": false,
-      "logprobs": null,
-      "stop": "\nEnglish:"
+      prompt: this.state.value 
     }
 
     axios.post(url, d).then((res) => {
