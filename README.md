@@ -1,68 +1,80 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# GPT-3 Sandbox: From idea to demo in a matter of minutes
 
-## Available Scripts
+Initial release date: 19 July 2020
 
-In the project directory, you can run:
+## Description
 
-### `yarn start`
+The goal of this project is to enable users to create cool web demos with their GPT-3 ideas by **only writing a few lines of Python.** This project addresses the following issues:
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+1. Automatically formatting a user's inputs and outputs so that the model can effectively pattern-match
+2. Creating a web app for a user to deploy locally and showcase their idea
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+Here's a quick example of priming GPT to convert English to LaTeX:
 
-### `yarn test`
+```
+# Construct GPT object and show some examples
+gpt = GPT(engine="davinci",
+          temperature=0.5,
+          max_tokens=100)
+gpt.add_example(Example('Two plus two equals four', '2 + 2 = 4'))
+gpt.add_example(Example('The integral from zero to infinity', '\\int_0^{\\infty}'))
+gpt.add_example(Example('The gradient of x squared plus two times x with respect to x', '\\nabla_x x^2 + 2x'))
+gpt.add_example(Example('The log of two times x', '\\log{2x}'))
+gpt.add_example(Example('x squared plus y squared plus equals z squared', 'x^2 + y^2 = z^2'))
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Define UI configuration
+config = UIConfig(description="Text to equation",
+                  buttonText="Translate",
+                  placeholder="x squared plus 2 times x")
 
-### `yarn build`
+demo_web_app(gpt, config)
+```
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Running this code as a python script would automatically launch a web app for you to test new inputs and outputs with.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+Technical details: the backend is in Flask, and the frontend is in React.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Background
 
-### `yarn eject`
+GPT-3 ([Brown et. al](https://arxiv.org/abs/2005.14165)) is OpenAI's latest language model. There's a [lot](https://twitter.com/sharifshameem/status/1282676454690451457) [it](https://twitter.com/jsngr/status/1284511080715362304?s=20) [can](https://twitter.com/paraschopra/status/1284801028676653060?s=20) [do](https://www.gwern.net/GPT-3), but one of the biggest pain points is in "priming," or seeding, the model with some inputs such that the model can intelligently create new outputs. Many people have ideas for GPT-3 but struggle to make them work, since priming is a new paradigm of machine learning. Additionally, it takes a nontrivial amount of web development to spin up a demo to showcase a cool idea. We built this project to make our own idea generation easier to experiment with.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Requirements
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Coding-wise, you only need Python. But for the app to run, you will need:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+* API key from the OpenAI API beta invite
+* Python 3
+* `yarn`
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Instructions to install Python 3 are [here](https://realpython.com/installing-python/), and instructions to install `yarn` are [here](https://classic.yarnpkg.com/en/docs/install/#mac-stable).
 
-## Learn More
+## Setup
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+To set up your virtual environment, do the following:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. Create a virtual environment in the root directory: `python -m venv $ENV_NAME`
+2. Activate the virtual environment: ` source $ENV_NAME/bin/activate`
+3. Install requirements: `pip install -r requirements.txt`
+4. To add your secret key: create a file anywhere on your computer called `openai.cfg` with the contents `OPENAI_KEY=$YOUR_SECRET_KEY`, where `$YOUR_SECRET_KEY` looks something like `sk-somerandomcharacters`. If you are unsure what your secret key is, navigate to the [API docs](https://beta.openai.com/developer-quickstart) and copy the token displayed next to the "secret" key type.
+5. Set your environment variable to read the secret key: run `export OPENAI_CONFIG=/path/to/config/openai.cfg`
 
-### Code Splitting
+To verify that your environment is set up properly, navigate to one of the scripts in the `examples` directory. Run one of them:
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+`python run_latex_app.py`
 
-### Analyzing the Bundle Size
+A new tab should pop up in your browser, and you should be able to interact with the UI! To stop this app, run ctrl-c or command-c in your terminal.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+## Quickstart
 
-### Making a Progressive Web App
+## Contributions
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+We actively encourage people to contribute by adding their own examples or even adding functionalities to the modules. Please make a pull request if you would like to add something, or create an issue if you have a question. We will update the contributors list on a regular basis.
 
-### Advanced Configuration
+## Authors
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+The following authors have committed 20 lines or more (ordered according to the Github contributors page):
 
-### Deployment
+* Shreya Shankar
+* Bora Uyumazturk
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
 
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify

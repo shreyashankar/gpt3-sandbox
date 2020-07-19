@@ -1,3 +1,5 @@
+import subprocess
+
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import openai
@@ -21,4 +23,5 @@ def demo_web_app(gpt, config=UIConfig()):
         response = gpt.submit_request(prompt) 
         return {'text': response['choices'][0]['text'][7:]}
 
+    subprocess.Popen(["yarn", "start"])
     app.run()
