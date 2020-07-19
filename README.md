@@ -66,7 +66,28 @@ To verify that your environment is set up properly, navigate to one of the scrip
 
 A new tab should pop up in your browser, and you should be able to interact with the UI! To stop this app, run ctrl-c or command-c in your terminal.
 
-## Quickstart
+## Interactive Priming
+
+The real power of GPT-3 is in its ability to learn to specialize to tasks given a few examples. However, priming can at times be more than an art than a science. Using the GPT and Example classes, you can easily experiment with different priming examples and immediately see their GPT on GPT-3's performance. Below is an example showing it improve incrementally at translating English to LaTeX as we feed it more example in the python interpreter: 
+
+```
+>>> from api.GPT import GPT, Example
+>>> gpt = GPT()
+>>> gpt.set_openai_key(key)
+>>> prompt = "integral from a to b of f of x"
+>>> print(gpt.get_top_reply(prompt))
+
+output: integral from at to be of f of x
+
+>>> gpt.add_example(Example("Two plus two equals four", "2 + 2 = 4"))
+>>> gpt.get_top_reply(prompt)
+output:
+
+>>> gpt.add_example(Example('The integral from zero to infinity', '\\int_0^{\\infty}'))
+>>> gpt.get_top_reply(prompt)
+output: \int_a^b f(x) dx
+
+``` 
 
 ## Contributions
 
