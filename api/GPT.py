@@ -17,4 +17,3 @@ class GPT:
     
     def get_prime_text(self):
         return '\n'.join(self.examples) + '\n'
-
