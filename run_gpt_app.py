@@ -1,6 +1,8 @@
 from api.demo_web_app import demo_web_app
-from api.gpt import GPT, Example
+from api.GPT import GPT, Example
+from api.UIConfig import UIConfig
 
+# prime GPT
 gpt = GPT()
 gpt.add_example(Example('Two plus two equals four', '2 + 2 = 4'))
 gpt.add_example(Example('The integral from zero to infinity', '\\int_0^{\\infty}'))
@@ -12,4 +14,8 @@ gpt.add_example(Example('E equals m times c squared', 'E = mc^2'))
 gpt.add_example(Example('H naught of t', 'H_0(t)'))
 gpt.add_example(Example('f of n equals 1 over (b-a) if n is 0 otherwise 5', 'f(n) = \\begin{cases} 1/(b-a) &\\mbox{if } n \\equiv 0 \\\ # 5 \\end{cases}'))
 
-demo_web_app(gpt)
+# define configuration
+config = UIConfig(description="My GPT App", buttonText="Run GPT", placeholder="How are you this morning, GPT?")
+print(config.to_dict())
+
+demo_web_app(gpt, config)
