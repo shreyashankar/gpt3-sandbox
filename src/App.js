@@ -7,6 +7,7 @@ import 'katex/dist/katex.min.css'
 import Latex from 'react-latex-next'
 import axios from 'axios'
 
+const SECRET_KEY = process.env.REACT_APP_SECRET_KEY;
 
 class App extends React.Component {
 
