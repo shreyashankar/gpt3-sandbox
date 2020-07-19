@@ -22,8 +22,7 @@ class GPT:
         self.examples.append(ex.format())
     
     def demo_web_app(self):
-        prime_text = '\n\n'.join(self.examples) + '\n\n'
-        print(prime_text)
+        prime_text = '\n'.join(self.examples) + '\n'
 
         app = Flask(__name__)
         app.config.from_envvar('LATEX_TRANSLATOR_CONFIG')
@@ -33,7 +32,7 @@ class GPT:
         def translate():
             prompt = request.json['prompt']
             openai.api_key = app.config['OPENAI_KEY'] 
-            query = prime_text + "\nLaTeX: " + prompt + "\n"
+            query = prime_text + "English: " + prompt + "\n"
             response = openai.Completion.create(engine="davinci",
                                                 prompt=query,
                                                 max_tokens=100,
