@@ -26,7 +26,7 @@ gpt.add_example(Example('x squared plus y squared plus equals z squared', 'x^2 +
 
 # Define UI configuration
 config = UIConfig(description="Text to equation",
-                  buttonText="Translate",
+                  button_text="Translate",
                   placeholder="x squared plus 2 times x")
 
 demo_web_app(gpt, config)
