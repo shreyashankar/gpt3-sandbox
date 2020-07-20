@@ -5,14 +5,11 @@ import openai
 
 from flask import Flask, request
 
+from .gpt import set_openai_key
 from .ui_config import UIConfig
 
 CONFIG_VAR = "OPENAI_CONFIG"
 KEY_NAME = "OPENAI_KEY"
-
-def set_openai_key(key):
-    """Sets OpenAI key."""
-    openai.api_key = key
 
 def demo_web_app(gpt, config=UIConfig()):
     """Creates Flask app to serve the React app."""
