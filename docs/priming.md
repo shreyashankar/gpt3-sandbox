@@ -1,5 +1,7 @@
 ## Interactive Priming
 
+As great as GPT-3 is, it usually doesn't know how to excel at every task out of the box. It
+benefits greatly from seeing a few examples, a process we like to refer to as "priming".
 Finding a set of examples which focuses GPT-3 on your specific use case will inevitably require 
 a bit of trial-and-error. To make this step easier, we designed our GPT interface to allow for 
 easy testing and exploration using the python interactive interpreter. Below we walk you through 
