@@ -4,7 +4,7 @@ Initial release date: 19 July 2020
 
 ## Description
 
-The goal of this project is to enable users to create cool web demos with their GPT-3 ideas **with just a few lines of Python.** 
+The goal of this project is to enable users to create cool web demos using the newly released OpenAI GPT-3 API **with just a few lines of Python.** 
 
 This project addresses the following issues:
 
