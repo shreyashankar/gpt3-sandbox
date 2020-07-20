@@ -1,4 +1,4 @@
-## Interactive Priming
+## Priming
 
 As smart as GPT-3 is, it still doesn't excel at most tasks out of the box. It
 benefits greatly from seeing a few examples, a process we like to refer to as "priming".
