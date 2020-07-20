@@ -68,6 +68,8 @@ To verify that your environment is set up properly, navigate to one of the scrip
 
 A new tab should pop up in your browser, and you should be able to interact with the UI! To stop this app, run ctrl-c or command-c in your terminal.
 
+To create your own example, check out the ["getting started" docs](https://github.com/shreyashankar/gpt3-sandbox/blob/master/docs/getting-started.md).
+
 ## Interactive Priming
 
 The real power of GPT-3 is in its ability to learn to specialize to tasks given a few examples. However, priming can at times be more than an art than a science. Using the GPT and Example classes, you can easily experiment with different priming examples and immediately see their GPT on GPT-3's performance. Below is an example showing it improve incrementally at translating English to LaTeX as we feed it more examples in the python interpreter: 
