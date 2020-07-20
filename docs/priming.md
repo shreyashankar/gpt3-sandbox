@@ -1,10 +1,9 @@
 ## Interactive Priming
 
-Correctly priming your GPT-3 queries is more of an art than a science. Finding a set of examples
-which focuses GPT-3 on your specific use case will inevitably require a bit of trial-and-error.
-To make this step easier, we designed our GPT interface to allow for easy testing and exploration
-using the python interactive interpreter. Below we walk you through an example of how to
-do so, again using the English to LaTeX use case. 
+Finding a set of examples which focuses GPT-3 on your specific use case will inevitably require 
+a bit of trial-and-error. To make this step easier, we designed our GPT interface to allow for 
+easy testing and exploration using the python interactive interpreter. Below we walk you through 
+an example of how to do so, again using the English to LaTeX use case. 
 
 First, open up your python interpreter by running `python` or `python3`. Next you'll need to 
 import the necessary items from the `api` package. You'll need the `GPT` class,
