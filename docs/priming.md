@@ -50,7 +50,8 @@ output: 1/n^2
 
 ```
 
-Better, but not quite there. Let's give it an expression with a sum.
+Better, but not quite there. Better, but not quite there. Let's give it an expression with a 
+sum and then see what happens: 
 
 ```
 >>> gpt.add_example(Example("sum from zero to twelve of i", "\\sum_{i=0}^5 i"))
@@ -60,6 +61,8 @@ output: \sum_{n=1}^\infty \frac{1}{n^2}
 >>> print(gpt.get_top_reply("sum from one to infinity of one over two to the n"))
 output: \sum_{n=1}^\infty \frac{1}{2^n}
 ```
+
+Finally, it works! Now go and see what other crazy stuff you can do with GPT-3!
 
 
 
