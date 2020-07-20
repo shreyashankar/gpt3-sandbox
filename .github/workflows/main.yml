@@ -23,5 +23,5 @@ jobs:
     - uses: actions/checkout@v2
     
     - name: GitHub Action for pylint
-    - uses: cclauss/GitHub-Action-for-pylint@0.7.0
+    - run: pip install -r requirements.txt ; pylint --ignore-patterns=examples/* **/*.py
 
