@@ -1,4 +1,4 @@
-# GPT-3 Sandbox: Turn your ideas into demos in matter of minutes
+# GPT-3 Sandbox: Turn your ideas into demos in a matter of minutes
 
 Initial release date: 19 July 2020
 
