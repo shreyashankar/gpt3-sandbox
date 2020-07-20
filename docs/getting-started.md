@@ -50,4 +50,4 @@ Save this python script to a file and run the file as you would normally run a P
 
 `python path_to_file.py`
 
-in your shell. A web app should pop up in your browser in a few seconds, and you should be able to interact with your primed model!
+in your shell. A web app should pop up in your browser in a few seconds, and you should be able to interact with your primed model. Please open any issues if you have questions!
