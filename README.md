@@ -54,7 +54,7 @@ Instructions to install Python 3 are [here](https://realpython.com/installing-py
 
 ## Setup
 
-To set up your virtual environment, do the following:
+First, clone or fork this repository. Then to set up your virtual environment, do the following:
 
 1. Create a virtual environment in the root directory: `python -m venv $ENV_NAME`
 2. Activate the virtual environment: ` source $ENV_NAME/bin/activate`
