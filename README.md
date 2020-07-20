@@ -61,6 +61,7 @@ First, clone or fork this repository. Then to set up your virtual environment, d
 3. Install requirements: `pip install -r api/requirements.txt`
 4. To add your secret key: create a file anywhere on your computer called `openai.cfg` with the contents `OPENAI_KEY=$YOUR_SECRET_KEY`, where `$YOUR_SECRET_KEY` looks something like `'sk-somerandomcharacters'`. If you are unsure what your secret key is, navigate to the [API docs](https://beta.openai.com/developer-quickstart) and copy the token displayed next to the "secret" key type.
 5. Set your environment variable to read the secret key: run `export OPENAI_CONFIG=/path/to/config/openai.cfg`
+6. Run `yarn install` in the root directory
 
 To verify that your environment is set up properly, run one of the scripts in the `examples` directory:
 
