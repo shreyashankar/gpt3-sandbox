@@ -26,7 +26,7 @@ gpt.add_example(Example('x squared plus y squared plus equals z squared', 'x^2 +
 
 # Define UI configuration
 config = UIConfig(description="Text to equation",
-                  buttonText="Translate",
+                  button_text="Translate",
                   placeholder="x squared plus 2 times x")
 
 demo_web_app(gpt, config)
@@ -73,9 +73,9 @@ A new tab should pop up in your browser, and you should be able to interact with
 The real power of GPT-3 is in its ability to learn to specialize to tasks given a few examples. However, priming can at times be more than an art than a science. Using the GPT and Example classes, you can easily experiment with different priming examples and immediately see their GPT on GPT-3's performance. Below is an example showing it improve incrementally at translating English to LaTeX as we feed it more examples in the python interpreter: 
 
 ```
->>> from api.GPT import GPT, Example
+>>> from api.GPT import GPT, Example, set_openai_key
 >>> gpt = GPT()
->>> gpt.set_openai_key(key)
+>>> set_openai_key(key)
 >>> prompt = "integral from a to b of f of x"
 >>> print(gpt.get_top_reply(prompt))
 output: integral from at to be of f of x

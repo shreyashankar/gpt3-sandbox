@@ -25,7 +25,7 @@ class App extends React.Component {
     const url = '/params';
     axios.get(url).then((res) => {
       let r = res.data;
-      this.setState({input: r.placeholder, buttonText: r.buttonText, description: r.description});
+      this.setState({input: r.placeholder, buttonText: r.button_text, description: r.description});
     });
   }
 
