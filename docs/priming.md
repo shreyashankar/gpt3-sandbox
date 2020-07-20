@@ -18,7 +18,7 @@ the `Example` class, and `set_openai_key`:
 Next, you'll want to set your open ai key to gain access to the beta. 
 
 ```
->>> set_openai_key($YOUR_OPEN_AI_KEY)
+>>> set_openai_key("YOUR_OPENAI_KEY") # omit the Bearer, it should look like "sk-..."
 ```
 
 Next, initialize your GPT class. You have the option of setting a few of the query
