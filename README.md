@@ -32,9 +32,9 @@ config = UIConfig(description="Text to equation",
 demo_web_app(gpt, config)
 ```
 
-Running this code as a python script would automatically launch a web app for you to test new inputs and outputs with.
+Running this code as a python script would automatically launch a web app for you to test new inputs and outputs with. There are already 3 example scripts in the `examples` directory.
 
-Technical details: the backend is in Flask, and the frontend is in React.
+Technical details: the backend is in Flask, and the frontend is in React. Note that this repository is currently not intended for production use.
 
 ## Background
 
@@ -63,7 +63,7 @@ First, clone or fork this repository. Then to set up your virtual environment, d
 5. Set your environment variable to read the secret key: run `export OPENAI_CONFIG=/path/to/config/openai.cfg`
 6. Run `yarn install` in the root directory
 
-To verify that your environment is set up properly, run one of the scripts in the `examples` directory:
+To verify that your environment is set up properly, run one of the 3 scripts in the `examples` directory:
 
 `python examples/run_latex_app.py`
 
