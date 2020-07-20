@@ -1,6 +1,8 @@
-# Documentation
+# Getting Started
 
-This is a work in progress, but the essential functions are described here.
+## Creating a GPT-3 Powered Web App
+
+Note: This is a work in progress, but the essential functions are described here.
 
 First, you will want to create a `GPT` object, which optionally acceps the parameters `engine`, `temperature`, and `max_tokens` (otherwise defaults to values in the following snippet):
 
