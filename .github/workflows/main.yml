@@ -21,6 +21,7 @@ jobs:
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
+    - run: git checkout HEAD^
     
     - name: GitHub Action for pylint
     - run: pip install -r requirements.txt ; pylint *api/*.py
