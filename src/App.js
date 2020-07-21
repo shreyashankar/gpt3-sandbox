@@ -4,6 +4,9 @@ import axios from "axios";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
+const UI_PARAMS_API_URL = "/params";
+const TRANSLATE_API_URL = "/translate";
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -21,9 +24,8 @@ class App extends React.Component {
 
   componentDidMount() {
     // Call API for the UI params
-    const url = "/params";
     axios
-      .get(url)
+      .get(UI_PARAMS_API_URL)
       .then(({ data: { placeholder, button_text, description } }) => {
         this.setState({
           input: placeholder,
@@ -39,12 +41,11 @@ class App extends React.Component {
 
   handleClick(e) {
     e.preventDefault();
-    const url = "/translate";
-    let data = {
+    let body = {
       prompt: this.state.input
     };
 
-    axios.post(url, data).then(({ data: { text } }) => {
+    axios.post(TRANSLATE_API_URL, body).then(({ data: { text } }) => {
       this.setState({ output: text });
     });
   }
