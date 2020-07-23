@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Row, Col } from "react-bootstrap";
 import axios from "axios";
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -14,11 +14,12 @@ class App extends React.Component {
       output: "",
       input: "",
       buttonText: "Submit",
-      description: "Description"
+      description: "Description",
+      show_example_form: false,
     };
 
     // Bind the event handlers
-    this.handleChange = this.handleChange.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
   }
 
@@ -26,16 +27,39 @@ class App extends React.Component {
     // Call API for the UI params
     axios
       .get(UI_PARAMS_API_URL)
-      .then(({ data: { placeholder, button_text, description } }) => {
+      .then(({ data: { placeholder, button_text, description, show_example_form } }) => {
         this.setState({
           input: placeholder,
           buttonText: button_text,
-          description: description
+          description: description,
+          show_example_form: show_example_form,
+          examples: [],
         });
       });
   }
 
-  handleChange(e) {
+  handleExampleChange = (index, field) => e => {
+    let examples = [...this.state.examples];
+    examples[index][field] = e.target.value;
+    this.setState({ examples: examples });
+  }
+
+ handleExampleDelete = (index) => e => {
+   e.preventDefault();
+   let examples = [
+     ...this.state.examples.slice(0, index),
+     ...this.state.examples.slice(index + 1)
+   ];
+   this.setState({ examples: examples});
+ }
+
+ handleExampleAdd = e => {
+   e.preventDefault();
+   let examples = this.state.examples.concat({input: "", output: ""});
+   this.setState({ examples: examples });
+ }
+
+  handleInputChange(e) {
     this.setState({ input: e.target.value });
   }
 
@@ -44,6 +68,9 @@ class App extends React.Component {
     let body = {
       prompt: this.state.input
     };
+    if (this.state.show_example_form) {
+      body.examples = this.state.examples
+    }
 
     axios.post(TRANSLATE_API_URL, body).then(({ data: { text } }) => {
       this.setState({ output: text });
@@ -51,6 +78,7 @@ class App extends React.Component {
   }
 
   render() {
+    const show_example_form = this.state.show_example_form
     return (
       <div>
         <head />
@@ -67,13 +95,60 @@ class App extends React.Component {
           >
             <Form onSubmit={this.handleClick}>
               <Form.Group controlId="formBasicEmail">
+                { show_example_form &&
+                  this.state.examples.map((exampleItem, index) => (
+                    <span key={index}>
+                      <Form.Group as={Row} controlId="formHorizontalEmail">
+                        <Form.Label column="sm" lg={2}>Example Input</Form.Label>
+                        <Col sm={10}>
+                          <Form.Control
+                            type="text"
+                            as="input"
+                            placeholder="Enter text"
+                            value={this.state.examples[index].input}
+                            onChange={this.handleExampleChange(index, "input")}
+                          />
+                        </Col>
+                      </Form.Group>
+                      <Form.Group as={Row} controlId="formHorizontalEmail">
+                        <Form.Label column="sm" lg={2}>Example Output</Form.Label>
+                        <Col sm={10}>
+                          <Form.Control
+                            type="text"
+                            as="textarea"
+                            placeholder="Enter text"
+                            value={this.state.examples[index].output}
+                            onChange={this.handleExampleChange(index, "output")}
+                          />
+                        </Col>
+                      </Form.Group>
+                      <Form.Group as={Row}>
+                        <Col sm={{ span: 10, offset: 2 }}>
+                          <Button
+                            type="button"
+                            size="sm"
+                            variant="danger"
+                            onClick={this.handleExampleDelete(index)}>Delete example</Button>
+                        </Col>
+                      </Form.Group>
+                    </span>
+                  ))
+                }
+                <Form.Group as={Row}>
+                  <Col sm={{ span: 10 }}>
+                    <Button
+                      type="button"
+                      variant="primary"
+                      onClick={this.handleExampleAdd}>Add example</Button>
+                  </Col>
+                </Form.Group>
                 <Form.Label>{this.state.description}</Form.Label>
                 <Form.Control
                   type="text"
                   as="textarea"
                   placeholder="Enter text"
                   value={this.state.input}
-                  onChange={this.handleChange}
+                  onChange={this.handleInputChange}
                 />
               </Form.Group>
 
