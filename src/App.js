@@ -96,9 +96,10 @@ class App extends React.Component {
             <Form onSubmit={this.handleClick}>
               <Form.Group controlId="formBasicEmail">
                 { show_example_form &&
-                  this.state.examples.map((exampleItem, index) => (
+                <div>
+                  { this.state.examples.map((exampleItem, index) => (
                     <span key={index}>
-                      <Form.Group as={Row} controlId="formHorizontalEmail">
+                      <Form.Group as={Row} controlId={"formExampleInput"+index}>
                         <Form.Label column="sm" lg={2}>Example Input</Form.Label>
                         <Col sm={10}>
                           <Form.Control
@@ -110,7 +111,7 @@ class App extends React.Component {
                           />
                         </Col>
                       </Form.Group>
-                      <Form.Group as={Row} controlId="formHorizontalEmail">
+                      <Form.Group as={Row} controlId={"formExampleOutput"+index}>
                         <Form.Label column="sm" lg={2}>Example Output</Form.Label>
                         <Col sm={10}>
                           <Form.Control
@@ -134,7 +135,6 @@ class App extends React.Component {
                     </span>
                   ))
                 }
-                { show_example_form &&
                   <Form.Group as={Row}>
                     <Col sm={{ span: 10 }}>
                       <Button
@@ -143,6 +143,7 @@ class App extends React.Component {
                         onClick={this.handleExampleAdd}>Add example</Button>
                     </Col>
                   </Form.Group>
+                </div>
                }
                 <Form.Label>{this.state.description}</Form.Label>
                 <Form.Control
