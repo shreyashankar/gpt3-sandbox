@@ -1,9 +1,0 @@
-{
-  "short_name": "GPT-3 Sandbox",
-  "name": "GPT-3 Sandbox",
-  "icons": [],
-  "start_url": ".",
-  "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
-}
