@@ -134,14 +134,16 @@ class App extends React.Component {
                     </span>
                   ))
                 }
-                <Form.Group as={Row}>
-                  <Col sm={{ span: 10 }}>
-                    <Button
-                      type="button"
-                      variant="primary"
-                      onClick={this.handleExampleAdd}>Add example</Button>
-                  </Col>
-                </Form.Group>
+                { show_example_form &&
+                  <Form.Group as={Row}>
+                    <Col sm={{ span: 10 }}>
+                      <Button
+                        type="button"
+                        variant="primary"
+                        onClick={this.handleExampleAdd}>Add example</Button>
+                    </Col>
+                  </Form.Group>
+               }
                 <Form.Label>{this.state.description}</Form.Label>
                 <Form.Control
                   type="text"
