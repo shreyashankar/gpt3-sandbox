@@ -15,7 +15,7 @@ class App extends React.Component {
       input: "",
       buttonText: "Submit",
       description: "Description",
-      show_example_form: false,
+      showExampleForm: false,
     };
 
     // Bind the event handlers
@@ -32,7 +32,7 @@ class App extends React.Component {
           input: placeholder,
           buttonText: button_text,
           description: description,
-          show_example_form: show_example_form,
+          showExampleForm: show_example_form,
           examples: [],
         });
       });
@@ -68,7 +68,7 @@ class App extends React.Component {
     let body = {
       prompt: this.state.input
     };
-    if (this.state.show_example_form) {
+    if (this.state.showExampleForm) {
       body.examples = this.state.examples
     }
 
@@ -78,7 +78,7 @@ class App extends React.Component {
   }
 
   render() {
-    const show_example_form = this.state.show_example_form
+    const showExampleForm = this.state.showExampleForm
     return (
       <div>
         <head />
@@ -95,8 +95,9 @@ class App extends React.Component {
           >
             <Form onSubmit={this.handleClick}>
               <Form.Group controlId="formBasicEmail">
-                { show_example_form &&
+                { showExampleForm &&
                 <div>
+                  <Form.Label>Examples</Form.Label>
                   { this.state.examples.map((exampleItem, index) => (
                     <span key={index}>
                       <Form.Group as={Row} controlId={"formExampleInput"+index}>
