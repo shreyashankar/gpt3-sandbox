@@ -29,7 +29,8 @@ def demo_web_app(gpt, config=UIConfig()):
         # pylint: disable=unused-variable
         prompt = request.json['prompt']
         response = gpt.submit_request(prompt)
-        return {'text': response['choices'][0]['text'][7:]}
+        offset = max(len(gpt.input_suffix) + len(gpt.output_prefix) - 1, 0)
+        return {'text': response['choices'][0]['text'][offset:]}
 
     subprocess.Popen(["yarn", "start"])
     app.run()

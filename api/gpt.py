@@ -10,9 +10,13 @@ def set_openai_key(key):
 class Example():
     """Stores an input, output pair and formats it to prime the model."""
 
-    def __init__(self, inp, out):
+    def __init__(self, inp, out, input_prefix = "input: ", input_suffix = "\n", output_prefix = "output: ", output_suffix = "\n"):
         self.input = inp
         self.output = out
+        self.input_prefix = input_prefix
+        self.input_suffix = input_suffix
+        self.output_prefix = output_prefix
+        self.output_suffix = output_suffix
 
     def get_input(self):
         """Returns the input of the example."""
@@ -24,7 +28,8 @@ class Example():
 
     def format(self):
         """Formats the input, output pair."""
-        return f"input: {self.input}\noutput: {self.output}\n"
+        return self.input_prefix + f"{self.input}" + self.input_suffix + self.output_prefix + f"{self.output}\n"
+        + self.output_suffix
 
 
 class GPT:
@@ -33,11 +38,23 @@ class GPT:
 
     def __init__(self, engine='davinci',
                  temperature=0.5,
-                 max_tokens=100):
+                 max_tokens=100,
+                 input_prefix = "input: ",
+                 input_suffix = "\n",
+                 output_prefix = "output: ",
+                 output_suffix = "\n",
+                 append_output_prefix_to_query = False,
+                 stop = "\ninput:"):
         self.examples = []
         self.engine = engine
         self.temperature = temperature
         self.max_tokens = max_tokens
+        self.input_prefix = input_prefix
+        self.input_suffix = input_suffix
+        self.output_prefix = output_prefix
+        self.output_suffix = output_suffix
+        self.append_output_prefix_to_query = append_output_prefix_to_query
+        self.stop = stop
 
     def add_example(self, ex):
         """Adds an example to the object. Example must be an instance
@@ -63,7 +80,11 @@ class GPT:
 
     def craft_query(self, prompt):
         """Creates the query for the API request."""
-        return self.get_prime_text() + "input: " + prompt + "\n"
+        q = self.get_prime_text() + self.input_prefix + prompt + self.input_suffix
+        if (self.append_output_prefix_to_query):
+            q = q + self.output_prefix
+
+        return q
 
     def submit_request(self, prompt):
         """Calls the OpenAI API with the specified parameters."""
@@ -74,7 +95,7 @@ class GPT:
                                             top_p=1,
                                             n=1,
                                             stream=False,
-                                            stop="\ninput:")
+                                            stop=self.stop)
         return response
 
     def get_top_reply(self, prompt):
