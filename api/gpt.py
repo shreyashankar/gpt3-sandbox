@@ -80,9 +80,9 @@ class GPT:
 
     def craft_query(self, prompt):
         """Creates the query for the API request."""
-        q = self.get_prime_text() + self.input_prefix + prompt
+        q = self.get_prime_text() + self.input_prefix + prompt + self.input_suffix
         if self.append_input_suffix_and_output_prefix_to_query:
-            q = q + self.input_suffix + self.output_prefix
+            q = q + self.output_prefix
 
         return q
 
