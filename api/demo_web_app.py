@@ -32,7 +32,6 @@ def demo_web_app(gpt, config=UIConfig()):
         offset = 0
         if not gpt.append_output_prefix_to_query:
             offset = len(gpt.output_prefix)
-            print(offset)
         return {'text': response['choices'][0]['text'][offset:]}
 
     subprocess.Popen(["yarn", "start"])
