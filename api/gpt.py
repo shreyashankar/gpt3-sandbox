@@ -10,13 +10,9 @@ def set_openai_key(key):
 class Example():
     """Stores an input, output pair and formats it to prime the model."""
 
-    def __init__(self, inp, out, input_prefix = "input: ", input_suffix = "\n", output_prefix = "output: ", output_suffix = "\n"):
+    def __init__(self, inp, out):
         self.input = inp
         self.output = out
-        self.input_prefix = input_prefix
-        self.input_suffix = input_suffix
-        self.output_prefix = output_prefix
-        self.output_suffix = output_suffix
 
     def get_input(self):
         """Returns the input of the example."""
@@ -25,11 +21,6 @@ class Example():
     def get_output(self):
         """Returns the intended output of the example."""
         return self.output
-
-    def format(self):
-        """Formats the input, output pair."""
-        return self.input_prefix + f"{self.input}" + self.input_suffix + self.output_prefix + f"{self.output}\n"
-        + self.output_suffix
 
 
 class GPT:
@@ -43,8 +34,7 @@ class GPT:
                  input_suffix = "\n",
                  output_prefix = "output: ",
                  output_suffix = "\n",
-                 append_input_suffix_and_output_prefix_to_query = False,
-                 stop = "\ninput:"):
+                 append_input_suffix_and_output_prefix_to_query = False):
         self.examples = []
         self.engine = engine
         self.temperature = temperature
@@ -54,13 +44,13 @@ class GPT:
         self.output_prefix = output_prefix
         self.output_suffix = output_suffix
         self.append_input_suffix_and_output_prefix_to_query = append_input_suffix_and_output_prefix_to_query
-        self.stop = stop
+        self.stop = (output_suffix + input_prefix).strip()
 
     def add_example(self, ex):
         """Adds an example to the object. Example must be an instance
         of the Example class."""
         assert isinstance(ex, Example), "Please create an Example object."
-        self.examples.append(ex.format())
+        self.examples.append(self.format_example(ex))
 
     def get_prime_text(self):
         """Formats all examples to prime the model."""
@@ -102,3 +92,7 @@ class GPT:
         """Obtains the best result as returned by the API."""
         response = self.submit_request(prompt)
         return response['choices'][0]['text']
+
+    def format_example(self, ex):
+        """Formats the input, output pair."""
+        return self.input_prefix + ex.get_input() + self.input_suffix + self.output_prefix + ex.get_output() + self.output_suffix
