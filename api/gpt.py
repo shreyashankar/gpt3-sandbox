@@ -43,7 +43,7 @@ class GPT:
                  input_suffix = "\n",
                  output_prefix = "output: ",
                  output_suffix = "\n",
-                 append_output_prefix_to_query = False,
+                 append_input_suffix_and_output_prefix_to_query = False,
                  stop = "\ninput:"):
         self.examples = []
         self.engine = engine
@@ -53,7 +53,7 @@ class GPT:
         self.input_suffix = input_suffix
         self.output_prefix = output_prefix
         self.output_suffix = output_suffix
-        self.append_output_prefix_to_query = append_output_prefix_to_query
+        self.append_input_suffix_and_output_prefix_to_query = append_input_suffix_and_output_prefix_to_query
         self.stop = stop
 
     def add_example(self, ex):
@@ -80,9 +80,9 @@ class GPT:
 
     def craft_query(self, prompt):
         """Creates the query for the API request."""
-        q = self.get_prime_text() + self.input_prefix + prompt + self.input_suffix
-        if (self.append_output_prefix_to_query):
-            q = q + self.output_prefix
+        q = self.get_prime_text() + self.input_prefix + prompt
+        if self.append_input_suffix_and_output_prefix_to_query:
+            q = q + self.input_suffix + self.output_prefix
 
         return q
 
