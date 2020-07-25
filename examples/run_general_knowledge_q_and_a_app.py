@@ -31,8 +31,8 @@ gpt.add_example(Example('In what year was the Coronation of Queen Elizabeth?', '
 
 
 # Define UI configuration
-config = UIConfig(description="Text to equation",
-                  button_text="Translate",
+config = UIConfig(description="Question to Answer",
+                  button_text="Answer",
                   placeholder="Who wrote the song 'Hey Jude'?")
 
 demo_web_app(gpt, config)
