@@ -33,7 +33,7 @@ class GPT:
                  input_prefix = "input: ",
                  input_suffix = "\n",
                  output_prefix = "output: ",
-                 output_suffix = "\n",
+                 output_suffix = "\n\n",
                  append_output_prefix_to_query = False):
         self.examples = []
         self.engine = engine
@@ -54,7 +54,7 @@ class GPT:
 
     def get_prime_text(self):
         """Formats all examples to prime the model."""
-        return '\n'.join(self.examples) + '\n'
+        return ''.join(self.examples)
 
     def get_engine(self):
         """Returns the engine specified for the API."""

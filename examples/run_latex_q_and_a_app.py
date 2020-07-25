@@ -8,7 +8,7 @@ from api import demo_web_app
 question_prefix = 'Q: '
 question_suffix = "\n"
 answer_prefix = "A: "
-answer_suffix = "\n"
+answer_suffix = "\n\n"
 
 
 # Construct GPT object and show some examples
