@@ -19,7 +19,7 @@ gpt = GPT(engine="davinci",
           input_suffix = question_suffix,
           output_prefix = answer_prefix,
           output_suffix = answer_suffix,
-          append_input_suffix_and_output_prefix_to_query = True)
+          append_output_prefix_to_query = True)
 
 gpt.add_example(Example('Two plus two equals four', '2 + 2 = 4'))
 gpt.add_example(
