@@ -1,11 +1,13 @@
 import React from "react";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import axios from "axios";
+import { debounce } from "lodash";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const UI_PARAMS_API_URL = "/params";
 const TRANSLATE_API_URL = "/translate";
+const EXAMPLE_API_URL = "/examples";
 
 class App extends React.Component {
   constructor(props) {
@@ -16,8 +18,8 @@ class App extends React.Component {
       buttonText: "Submit",
       description: "Description",
       showExampleForm: false,
-    };
-
+      examples: [],
+    }
     // Bind the event handlers
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
@@ -33,30 +35,49 @@ class App extends React.Component {
           buttonText: button_text,
           description: description,
           showExampleForm: show_example_form,
-          examples: [],
         });
+        if (this.state.showExampleForm) {
+          axios
+            .get(EXAMPLE_API_URL)
+            .then(({ data: examples }) => {
+              this.setState({ examples: examples })
+            });
+        }
       });
   }
 
+  updateExample(id, body) {
+    axios.put(EXAMPLE_API_URL + "/" + id, body)
+  }
+
+ debouncedUpdateExample = debounce(this.updateExample, 50)
+
   handleExampleChange = (index, field) => e => {
+    let body = {};
+    body[field]=e.target.value;
+    let id = this.state.examples[index].id;
     let examples = [...this.state.examples];
     examples[index][field] = e.target.value;
     this.setState({ examples: examples });
+    this.debouncedUpdateExample(id, body);
   }
 
  handleExampleDelete = (index) => e => {
    e.preventDefault();
-   let examples = [
-     ...this.state.examples.slice(0, index),
-     ...this.state.examples.slice(index + 1)
-   ];
-   this.setState({ examples: examples});
+   axios
+     .delete(EXAMPLE_API_URL + "/" + this.state.examples[index].id)
+     .then(({ data: examples }) => {
+       this.setState({ examples: examples });
+     });
  }
 
  handleExampleAdd = e => {
    e.preventDefault();
-   let examples = this.state.examples.concat({input: "", output: ""});
-   this.setState({ examples: examples });
+   axios
+     .post(EXAMPLE_API_URL)
+     .then(({ data: examples }) => {
+       this.setState({ examples: examples });
+     });
  }
 
   handleInputChange(e) {

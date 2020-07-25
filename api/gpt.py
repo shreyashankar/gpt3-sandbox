@@ -1,11 +1,12 @@
 """Creates the Example and GPT classes for a user to interface with the OpenAI API."""
 
 import openai
-
+import uuid
 
 def set_openai_key(key):
     """Sets OpenAI key."""
     openai.api_key = key
+
 
 class Example():
     """Stores an input, output pair and formats it to prime the model."""
@@ -13,6 +14,7 @@ class Example():
     def __init__(self, inp, out):
         self.input = inp
         self.output = out
+        self.id = uuid.uuid4().hex
 
     def get_input(self):
         """Returns the input of the example."""
@@ -21,6 +23,15 @@ class Example():
     def get_output(self):
         """Returns the intended output of the example."""
         return self.output
+
+    def get_id(self):
+        """Returns the unique ID of the example."""
+        return self.id
+
+    def as_dict(self):
+        return {"input": self.get_input(),
+                "output": self.get_output(),
+                "id": self.get_id()}
 
     def format(self):
         """Formats the input, output pair."""
@@ -43,11 +54,33 @@ class GPT:
         """Adds an example to the object. Example must be an instance
         of the Example class."""
         assert isinstance(ex, Example), "Please create an Example object."
-        self.examples.append(ex.format())
+        self.examples.append(ex)
+
+    def find_example(self, id):
+        """ Returns the index of the example with specific id"""
+        for i, example in enumerate(self.examples):
+            if example.get_id() == id:
+                return i
+
+    def clear_example(self, id):
+        """Clears example with the specific id"""
+        index = self.find_example(id)
+        if index is not None:
+            del self.examples[index]
+
+    def get_example(self, id):
+        """ Get a single example """
+        index = self.find_example(id)
+        if index is not None:
+            return self.examples[index]
+
+    def get_all_examples(self):
+        """ Returns all examples as a list of dicts"""
+        return [i.as_dict() for i in self.examples]
 
     def get_prime_text(self):
         """Formats all examples to prime the model."""
-        return '\n'.join(self.examples) + '\n'
+        return '\n'.join([i.format() for i in self.examples]) + '\n'
 
     def get_engine(self):
         """Returns the engine specified for the API."""
