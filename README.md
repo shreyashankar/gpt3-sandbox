@@ -57,21 +57,13 @@ Instructions to install Python 3 are [here](https://realpython.com/installing-py
 First, clone or fork this repository. Then to set up your virtual environment, do the following:
 
 1. Create a virtual environment in the root directory: `python -m venv $ENV_NAME`
-2. Activate the virtual environment: ` source $ENV_NAME/bin/activate`
+2. Activate the virtual environment: ` source $ENV_NAME/bin/activate` (for MacOS, Unix, or Linux users) or ` .\ENV_NAME\Scripts\activate` (for Windows users)
 3. Install requirements: `pip install -r api/requirements.txt`
 4. To add your secret key: create a file anywhere on your computer called `openai.cfg` with the contents `OPENAI_KEY=$YOUR_SECRET_KEY`, where `$YOUR_SECRET_KEY` looks something like `'sk-somerandomcharacters'` (including quotes). If you are unsure what your secret key is, navigate to the [API docs](https://beta.openai.com/developer-quickstart) and copy the token displayed next to the "secret" key type.
-5. Set your environment variable to read the secret key: run `export OPENAI_CONFIG=/path/to/config/openai.cfg`
+5. Set your environment variable to read the secret key: run `export OPENAI_CONFIG=/path/to/config/openai.cfg` (for MacOS, Unix, or Linux users) or `set OPENAI_CONFIG=/path/to/config/openai.cfg` (for Windows users)
 6. Run `yarn install` in the root directory
 
-instructions for Windows users:
-1. Create a virtual environment in the root directory: `python -m venv ENV_NAME`
-2. Activate the virtual environment: ` .\ENV_NAME\Scripts\activate`
-3. Install requirements: `pip install -r api/requirements.txt`
-4. To add your secret key: create a file anywhere on your computer called `openai.cfg` with the contents `OPENAI_KEY=$YOUR_SECRET_KEY`, where `$YOUR_SECRET_KEY` looks something like `'sk-somerandomcharacters'` (including quotes). If you are unsure what your secret key is, navigate to the [API docs](https://beta.openai.com/developer-quickstart) and copy the token displayed next to the "secret" key type.
-5. Set your environment variable to read the secret key: run `set OPENAI_CONFIG=/path/to/config/openai.cfg`
-6. Run `yarn install` in the root directory
-
-To run the demos, modify the following line inside the demos:
+If you are a Windows user, to run the demos, you will need to modify the following line inside `api/demo_web_app.py`:
 `subprocess.Popen(["yarn", "start"])` to `subprocess.Popen(["yarn", "start"], shell=True)`
 
 To verify that your environment is set up properly, run one of the 3 scripts in the `examples` directory:
