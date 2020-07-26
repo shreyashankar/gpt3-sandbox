@@ -51,6 +51,11 @@ class QueryFormat():
         self.output_format = output_format
         self.append_output_prefix_to_query = append_output_prefix_to_query
 
+        assert isinstance(input_format, TextFormat), \
+        "Please create a TextFormat object."
+        assert isinstance(output_format, TextFormat), \
+        "Please create a TextFormat object."
+
     def get_input_format(self):
         """Returns the example input format."""
         return self.input_format
@@ -94,6 +99,9 @@ class GPT:
         self.temperature = temperature
         self.max_tokens = max_tokens
         self.query_format = query_format
+
+        assert isinstance(query_format, QueryFormat), \
+        "Please create a QueryFormat object."
 
     def add_example(self, ex):
         """Adds an example to the object. Example must be an instance
