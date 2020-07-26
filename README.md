@@ -97,6 +97,8 @@ output: \int_a^b f(x) dx
 
 We actively encourage people to contribute by adding their own examples or even adding functionalities to the modules. Please make a pull request if you would like to add something, or create an issue if you have a question. We will update the contributors list on a regular basis.
 
+Please *do not* leave your secret key in plaintext in your pull request!
+
 ## Authors
 
 The following authors have committed 20 lines or more (ordered according to the Github contributors page):
