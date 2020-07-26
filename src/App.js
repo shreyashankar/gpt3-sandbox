@@ -113,7 +113,7 @@ class App extends React.Component {
               <Form.Group controlId="formBasicEmail">
                 {showExampleForm && (
                   <div>
-                    <Form.Label>Examples</Form.Label>
+                    <h4 style={{ marginBottom: "25px" }}>Examples</h4>
                     {Object.values(this.state.examples).map(example => (
                       <span key={example.id}>
                         <Form.Group
