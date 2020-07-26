@@ -3,12 +3,13 @@
 import openai
 import uuid
 
+
 def set_openai_key(key):
     """Sets OpenAI key."""
     openai.api_key = key
 
 
-class Example():
+class Example:
     """Stores an input, output pair and formats it to prime the model."""
 
     def __init__(self, inp, out):
@@ -29,9 +30,11 @@ class Example():
         return self.id
 
     def as_dict(self):
-        return {"input": self.get_input(),
-                "output": self.get_output(),
-                "id": self.get_id()}
+        return {
+            "input": self.get_input(),
+            "output": self.get_output(),
+            "id": self.get_id(),
+        }
 
     def format(self):
         """Formats the input, output pair."""
@@ -42,10 +45,8 @@ class GPT:
     """The main class for a user to interface with the OpenAI API.
     A user can add examples and set parameters of the API request."""
 
-    def __init__(self, engine='davinci',
-                 temperature=0.5,
-                 max_tokens=100):
-        self.examples = []
+    def __init__(self, engine="davinci", temperature=0.5, max_tokens=100):
+        self.examples = {}
         self.engine = engine
         self.temperature = temperature
         self.max_tokens = max_tokens
@@ -54,33 +55,24 @@ class GPT:
         """Adds an example to the object. Example must be an instance
         of the Example class."""
         assert isinstance(ex, Example), "Please create an Example object."
-        self.examples.append(ex)
-
-    def find_example(self, id):
-        """ Returns the index of the example with specific id"""
-        for i, example in enumerate(self.examples):
-            if example.get_id() == id:
-                return i
+        self.examples[ex.get_id()] = ex
 
     def clear_example(self, id):
         """Clears example with the specific id"""
-        index = self.find_example(id)
-        if index is not None:
-            del self.examples[index]
+        if id in self.examples:
+            del self.examples[id]
 
     def get_example(self, id):
         """ Get a single example """
-        index = self.find_example(id)
-        if index is not None:
-            return self.examples[index]
+        return self.examples.get(id, None)
 
     def get_all_examples(self):
         """ Returns all examples as a list of dicts"""
-        return [i.as_dict() for i in self.examples]
+        return {k: v.as_dict() for k, v in self.examples.items()}
 
     def get_prime_text(self):
         """Formats all examples to prime the model."""
-        return '\n'.join([i.format() for i in self.examples]) + '\n'
+        return "\n".join([i.format() for i in self.examples.values()]) + "\n"
 
     def get_engine(self):
         """Returns the engine specified for the API."""
@@ -100,17 +92,19 @@ class GPT:
 
     def submit_request(self, prompt):
         """Calls the OpenAI API with the specified parameters."""
-        response = openai.Completion.create(engine=self.get_engine(),
-                                            prompt=self.craft_query(prompt),
-                                            max_tokens=self.get_max_tokens(),
-                                            temperature=self.get_temperature(),
-                                            top_p=1,
-                                            n=1,
-                                            stream=False,
-                                            stop="\ninput:")
+        response = openai.Completion.create(
+            engine=self.get_engine(),
+            prompt=self.craft_query(prompt),
+            max_tokens=self.get_max_tokens(),
+            temperature=self.get_temperature(),
+            top_p=1,
+            n=1,
+            stream=False,
+            stop="\ninput:",
+        )
         return response
 
     def get_top_reply(self, prompt):
         """Obtains the best result as returned by the API."""
         response = self.submit_request(prompt)
-        return response['choices'][0]['text']
+        return response["choices"][0]["text"]

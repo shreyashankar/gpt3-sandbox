@@ -18,7 +18,7 @@ class App extends React.Component {
       buttonText: "Submit",
       description: "Description",
       showExampleForm: false,
-      examples: [],
+      examples: {},
     }
     // Bind the event handlers
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -52,20 +52,19 @@ class App extends React.Component {
 
  debouncedUpdateExample = debounce(this.updateExample, 50)
 
-  handleExampleChange = (index, field) => e => {
+  handleExampleChange = (id, field) => e => {
     let body = {};
     body[field]=e.target.value;
-    let id = this.state.examples[index].id;
-    let examples = [...this.state.examples];
-    examples[index][field] = e.target.value;
+    let examples = Object.assign({}, this.state.examples);
+    examples[id][field] = e.target.value;
     this.setState({ examples: examples });
     this.debouncedUpdateExample(id, body);
   }
 
- handleExampleDelete = (index) => e => {
+ handleExampleDelete = (id) => e => {
    e.preventDefault();
    axios
-     .delete(EXAMPLE_API_URL + "/" + this.state.examples[index].id)
+     .delete(EXAMPLE_API_URL + "/" + id)
      .then(({ data: examples }) => {
        this.setState({ examples: examples });
      });
@@ -89,10 +88,6 @@ class App extends React.Component {
     let body = {
       prompt: this.state.input
     };
-    if (this.state.showExampleForm) {
-      body.examples = this.state.examples
-    }
-
     axios.post(TRANSLATE_API_URL, body).then(({ data: { text } }) => {
       this.setState({ output: text });
     });
@@ -119,29 +114,29 @@ class App extends React.Component {
                 { showExampleForm &&
                 <div>
                   <Form.Label>Examples</Form.Label>
-                  { this.state.examples.map((exampleItem, index) => (
-                    <span key={index}>
-                      <Form.Group as={Row} controlId={"formExampleInput"+index}>
+                  { Object.values(this.state.examples).map((example) => (
+                    <span key={example.id}>
+                      <Form.Group as={Row} controlId={"formExampleInput" + example.id}>
                         <Form.Label column="sm" lg={2}>Example Input</Form.Label>
                         <Col sm={10}>
                           <Form.Control
                             type="text"
                             as="input"
                             placeholder="Enter text"
-                            value={this.state.examples[index].input}
-                            onChange={this.handleExampleChange(index, "input")}
+                            value={example.input}
+                            onChange={this.handleExampleChange(example.id, "input")}
                           />
                         </Col>
                       </Form.Group>
-                      <Form.Group as={Row} controlId={"formExampleOutput"+index}>
+                      <Form.Group as={Row} controlId={"formExampleOutput" + example.id}>
                         <Form.Label column="sm" lg={2}>Example Output</Form.Label>
                         <Col sm={10}>
                           <Form.Control
                             type="text"
                             as="textarea"
                             placeholder="Enter text"
-                            value={this.state.examples[index].output}
-                            onChange={this.handleExampleChange(index, "output")}
+                            value={example.output}
+                            onChange={this.handleExampleChange(example.id, "output")}
                           />
                         </Col>
                       </Form.Group>
@@ -151,7 +146,7 @@ class App extends React.Component {
                             type="button"
                             size="sm"
                             variant="danger"
-                            onClick={this.handleExampleDelete(index)}>Delete example</Button>
+                            onClick={this.handleExampleDelete(example.id)}>Delete example</Button>
                         </Col>
                       </Form.Group>
                     </span>
