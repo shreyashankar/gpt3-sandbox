@@ -7,8 +7,9 @@ def set_openai_key(key):
     """Sets OpenAI key."""
     openai.api_key = key
 
+
 class Example():
-    """Stores an input, output pair it to prime the model."""
+    """Stores an input, output pair and formats it to prime the model."""
 
     def __init__(self, inp, out):
         self.input = inp
@@ -22,69 +23,6 @@ class Example():
         """Returns the intended output of the example."""
         return self.output
 
-class TextFormat():
-    """Formats text by prefixing and suffixing with the provided parameters."""
-
-    def __init__(self, prefix, suffix):
-        self.prefix = prefix
-        self.suffix = suffix
-
-    def get_prefix(self):
-        """Returns the prefix of this format."""
-        return self.prefix
-
-    def get_suffix(self):
-        """Returns the suffix of this format."""
-        return self.suffix
-
-    def get_wrapped_text(self, text):
-        """Formats the input, output pair."""
-        return self.prefix + text + self.suffix
-
-class QueryFormat():
-    """Formats a query."""
-
-    def __init__(self, input_format=TextFormat("input: ", "\n"),
-                 output_format=TextFormat("output: ", "\n\n"),
-                 append_output_prefix_to_query=False):
-        self.input_format = input_format
-        self.output_format = output_format
-        self.append_output_prefix_to_query = append_output_prefix_to_query
-
-        assert isinstance(input_format, TextFormat), \
-        "Please create a TextFormat object."
-        assert isinstance(output_format, TextFormat), \
-        "Please create a TextFormat object."
-
-    def get_input_format(self):
-        """Returns the example input format."""
-        return self.input_format
-
-    def get_output_format(self):
-        """Returns the example output format."""
-        return self.output_format
-
-    def get_append_output_prefix_to_query(self):
-        """Indicates whether the output prefix should be appended to the query."""
-        return self.append_output_prefix_to_query
-
-    def format_example(self, ex):
-        """Formats the input, output pair."""
-        return self.input_format.get_wrapped_text(ex.get_input()) \
-        + self.output_format.get_wrapped_text(ex.get_output())
-
-    def get_stop_token(self):
-        """Returns the stop token of this query format."""
-        return (self.output_format.get_suffix() \
-        + self.input_format.get_prefix()).strip()
-
-
-    def format_query(self, prime_text, prompt):
-        """Creates the query for the API request."""
-        query = prime_text + self.input_format.get_wrapped_text(prompt)
-        if self.append_output_prefix_to_query:
-            query = query + self.output_format.get_prefix()
-        return query
 
 class GPT:
     """The main class for a user to interface with the OpenAI API.
@@ -93,21 +31,27 @@ class GPT:
     def __init__(self, engine='davinci',
                  temperature=0.5,
                  max_tokens=100,
-                 query_format=QueryFormat()):
+                 input_prefix="input: ",
+                 input_suffix="\n",
+                 output_prefix="output: ",
+                 output_suffix="\n\n",
+                 append_output_prefix_to_query=False):
         self.examples = []
         self.engine = engine
         self.temperature = temperature
         self.max_tokens = max_tokens
-        self.query_format = query_format
-
-        assert isinstance(query_format, QueryFormat), \
-        "Please create a QueryFormat object."
+        self.input_prefix = input_prefix
+        self.input_suffix = input_suffix
+        self.output_prefix = output_prefix
+        self.output_suffix = output_suffix
+        self.append_output_prefix_to_query = append_output_prefix_to_query
+        self.stop = (output_suffix + input_prefix).strip()
 
     def add_example(self, ex):
         """Adds an example to the object. Example must be an instance
         of the Example class."""
         assert isinstance(ex, Example), "Please create an Example object."
-        self.examples.append(self.query_format.format_example(ex))
+        self.examples.append(self.format_example(ex))
 
     def get_prime_text(self):
         """Formats all examples to prime the model."""
@@ -125,13 +69,13 @@ class GPT:
         """Returns the max tokens specified for the API."""
         return self.max_tokens
 
-    def get_append_output_prefix_to_query(self):
-        """Returns the suffix of this format."""
-        return self.query_format.get_append_output_prefix_to_query()
-
     def craft_query(self, prompt):
         """Creates the query for the API request."""
-        return self.query_format.format_query(self.get_prime_text(), prompt)
+        q = self.get_prime_text() + self.input_prefix + prompt + self.input_suffix
+        if self.append_output_prefix_to_query:
+            q = q + self.output_prefix
+
+        return q
 
     def submit_request(self, prompt):
         """Calls the OpenAI API with the specified parameters."""
@@ -142,10 +86,14 @@ class GPT:
                                             top_p=1,
                                             n=1,
                                             stream=False,
-                                            stop=self.query_format.get_stop_token())
+                                            stop=self.stop)
         return response
 
     def get_top_reply(self, prompt):
         """Obtains the best result as returned by the API."""
         response = self.submit_request(prompt)
         return response['choices'][0]['text']
+
+    def format_example(self, ex):
+        """Formats the input, output pair."""
+        return self.input_prefix + ex.get_input() + self.input_suffix + self.output_prefix + ex.get_output() + self.output_suffix
