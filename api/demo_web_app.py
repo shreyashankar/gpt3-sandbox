@@ -32,12 +32,14 @@ def demo_web_app(gpt, config=UIConfig()):
 
     def get_example(example_id):
         """Gets a single example or all the examples."""
-        if example_id:
-            example = gpt.get_example(example_id)
-            if example:
-                return json.dumps(example.as_dict())
+        # return all examples
+        if not example_id:
+            return json.dumps(gpt.get_all_examples())
+
+        example = gpt.get_example(example_id)
+        if not example:
             return error("id not found", HTTPStatus.NOT_FOUND)
-        return json.dumps(gpt.get_all_examples())
+        return json.dumps(example.as_dict())
 
     def post_example():
         """Adds an empty example."""
@@ -47,23 +49,25 @@ def demo_web_app(gpt, config=UIConfig()):
 
     def put_example(args, example_id):
         """Modifies an existing example."""
-        if example_id:
-            example = gpt.get_example(example_id)
-            if example:
-                if args.get("input", None):
-                    example.input = args["input"]
-                if args.get("output", None):
-                    example.output = args["output"]
-                return json.dumps(example.as_dict())
+        if not example_id:
+            return error("id required", HTTPStatus.BAD_REQUEST)
+
+        example = gpt.get_example(example_id)
+        if not example:
             return error("id not found", HTTPStatus.NOT_FOUND)
-        return error("id required", HTTPStatus.BAD_REQUEST)
+        if args.get("input", None):
+            example.input = args["input"]
+        if args.get("output", None):
+            example.output = args["output"]
+        return json.dumps(example.as_dict())
 
     def delete_example(example_id):
         """Deletes an example."""
-        if example_id:
-            gpt.clear_example(example_id)
-            return json.dumps(gpt.get_all_examples())
-        return error("id required", HTTPStatus.BAD_REQUEST)
+        if not example_id:
+            return error("id required", HTTPStatus.BAD_REQUEST)
+
+        gpt.delete_example(example_id)
+        return json.dumps(gpt.get_all_examples())
 
     @app.route(
         "/examples",
@@ -79,11 +83,11 @@ def demo_web_app(gpt, config=UIConfig()):
         args = request.json
         if method == "GET":
             return get_example(example_id)
-        elif method == "POST":
+        if method == "POST":
             return post_example()
-        elif method == "PUT":
+        if method == "PUT":
             return put_example(args, example_id)
-        elif method == "DELETE":
+        if method == "DELETE":
             return delete_example(example_id)
         return error("Not implemented", HTTPStatus.NOT_IMPLEMENTED)
 
