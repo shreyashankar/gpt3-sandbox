@@ -72,11 +72,7 @@ instructions for Windows users:
 6. Run `yarn install` in the root directory
 
 To run the demos, modify the following line inside the demos:
-`subprocess.Popen(["yarn", "start"])`
-
-to
-
-`subprocess.Popen(["yarn", "start"], shell=True)`
+`subprocess.Popen(["yarn", "start"])` to `subprocess.Popen(["yarn", "start"], shell=True)`
 
 To verify that your environment is set up properly, run one of the 3 scripts in the `examples` directory:
 `python examples/run_latex_app.py`
