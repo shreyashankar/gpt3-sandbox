@@ -2,24 +2,26 @@ import os
 import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 
-from api import GPT, Example, UIConfig
+from api import GPT, Example, TextFormat, QueryFormat, UIConfig
 from api import demo_web_app
 
 question_prefix = 'Q: '
 question_suffix = "\n"
 answer_prefix = "A: "
 answer_suffix = "\n\n"
+append_output_prefix_to_query=True
+
+query_format = QueryFormat(
+                TextFormat(question_prefix, question_suffix),
+                TextFormat(answer_prefix, answer_suffix),
+                append_output_prefix_to_query)
 
 
 # Construct GPT object and show some examples
 gpt = GPT(engine="davinci",
           temperature=0.5,
           max_tokens=100,
-          input_prefix = question_prefix,
-          input_suffix = question_suffix,
-          output_prefix = answer_prefix,
-          output_suffix = answer_suffix,
-          append_output_prefix_to_query = True)
+          query_format = query_format)
 
 gpt.add_example(Example('What is human life expectancy in the United States?', 'Human life expectancy in the United States is 78 years.'))
 gpt.add_example(

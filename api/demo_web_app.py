@@ -30,8 +30,8 @@ def demo_web_app(gpt, config=UIConfig()):
         prompt = request.json['prompt']
         response = gpt.submit_request(prompt)
         offset = 0
-        if not gpt.append_output_prefix_to_query:
-            offset = len(gpt.output_prefix)
+        if not gpt.get_append_output_prefix_to_query():
+            offset = len(gpt.query_format.output_format.prefix)
         return {'text': response['choices'][0]['text'][offset:]}
 
     subprocess.Popen(["yarn", "start"])
