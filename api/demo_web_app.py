@@ -31,7 +31,7 @@ def demo_web_app(gpt, config=UIConfig()):
         return Response(json.dumps({"error": err_msg}), status=status_code)
 
     def get_example(example_id):
-        """ Gets a single example or all the examples"""
+        """Gets a single example or all the examples."""
         if example_id:
             example = gpt.get_example(example_id)
             if example:
@@ -40,13 +40,13 @@ def demo_web_app(gpt, config=UIConfig()):
         return json.dumps(gpt.get_all_examples())
 
     def post_example():
-        """Adds an empty example"""
+        """Adds an empty example."""
         new_example = Example("", "")
         gpt.add_example(new_example)
         return json.dumps(gpt.get_all_examples())
 
     def put_example(args, example_id):
-        """Modifies an existing example"""
+        """Modifies an existing example."""
         if example_id:
             example = gpt.get_example(example_id)
             if example:
@@ -59,17 +59,20 @@ def demo_web_app(gpt, config=UIConfig()):
         return error("id required", HTTPStatus.BAD_REQUEST)
 
     def delete_example(example_id):
-        """Deletes an example"""
+        """Deletes an example."""
         if example_id:
             gpt.clear_example(example_id)
             return json.dumps(gpt.get_all_examples())
         return error("id required", HTTPStatus.BAD_REQUEST)
 
     @app.route(
-        "/examples", methods=["GET", "POST"], defaults={"example_id": ""},
+        "/examples",
+        methods=["GET", "POST"],
+        defaults={"example_id": ""},
     )
     @app.route(
-        "/examples/<example_id>", methods=["GET", "PUT", "DELETE"],
+        "/examples/<example_id>",
+        methods=["GET", "PUT", "DELETE"],
     )
     def examples(example_id):
         method = request.method

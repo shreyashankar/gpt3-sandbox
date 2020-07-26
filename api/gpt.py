@@ -1,4 +1,5 @@
-"""Creates the Example and GPT classes for a user to interface with the OpenAI API."""
+"""Creates the Example and GPT classes for a user to interface with the OpenAI
+API."""
 
 import openai
 import uuid
@@ -11,7 +12,6 @@ def set_openai_key(key):
 
 class Example:
     """Stores an input, output pair and formats it to prime the model."""
-
     def __init__(self, inp, out):
         self.input = inp
         self.output = out
@@ -43,8 +43,9 @@ class Example:
 
 class GPT:
     """The main class for a user to interface with the OpenAI API.
-    A user can add examples and set parameters of the API request."""
 
+    A user can add examples and set parameters of the API request.
+    """
     def __init__(self, engine="davinci", temperature=0.5, max_tokens=100):
         self.examples = {}
         self.engine = engine
@@ -52,22 +53,24 @@ class GPT:
         self.max_tokens = max_tokens
 
     def add_example(self, ex):
-        """Adds an example to the object. Example must be an instance
-        of the Example class."""
+        """Adds an example to the object.
+
+        Example must be an instance of the Example class.
+        """
         assert isinstance(ex, Example), "Please create an Example object."
         self.examples[ex.get_id()] = ex
 
-    def clear_example(self, id):
-        """Clears example with the specific id"""
+    def delete_example(self, id):
+        """Delete example with the specific id."""
         if id in self.examples:
             del self.examples[id]
 
     def get_example(self, id):
-        """ Get a single example """
+        """Get a single example."""
         return self.examples.get(id, None)
 
     def get_all_examples(self):
-        """ Returns all examples as a list of dicts"""
+        """Returns all examples as a list of dicts."""
         return {k: v.as_dict() for k, v in self.examples.items()}
 
     def get_prime_text(self):
