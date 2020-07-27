@@ -2,6 +2,8 @@
 *.cfg
 *venv*
 
+*pycache*
+
 # dependencies
 /node_modules
 /.pnp

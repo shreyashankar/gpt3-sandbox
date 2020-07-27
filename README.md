@@ -34,6 +34,8 @@ demo_web_app(gpt, config)
 
 Running this code as a python script would automatically launch a web app for you to test new inputs and outputs with. There are already 3 example scripts in the `examples` directory.
 
+You can also prime GPT from the UI. for that, pass `show_example_form=True` to `UIConfig` along with other parameters.
+
 Technical details: the backend is in Flask, and the frontend is in React. Note that this repository is currently not intended for production use.
 
 ## Background
