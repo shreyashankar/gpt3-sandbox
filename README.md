@@ -110,6 +110,7 @@ The following authors have committed 20 lines or more (ordered according to the 
 * Shreya Shankar
 * Bora Uyumazturk
 * Devin Stein
+* Gulan
 * Michael Lavelle
 
 
