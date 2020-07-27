@@ -85,8 +85,8 @@ class GPT:
 
     def get_prime_text(self):
         """Formats all examples to prime the model."""
-        return "\n".join(
-            [self.format_example(ex) for ex in self.examples.values()]) + "\n"
+        return "".join(
+            [self.format_example(ex) for ex in self.examples.values()])
 
     def get_engine(self):
         """Returns the engine specified for the API."""
