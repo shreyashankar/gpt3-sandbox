@@ -9,6 +9,8 @@ const UI_PARAMS_API_URL = "/params";
 const TRANSLATE_API_URL = "/translate";
 const EXAMPLE_API_URL = "/examples";
 
+const DEBOUNCE_INPUT = 250;
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -52,17 +54,17 @@ class App extends React.Component {
     axios.put(`${EXAMPLE_API_URL}/${id}`, body);
   }
 
-  debouncedUpdateExample = debounce(this.updateExample, 50);
+  debouncedUpdateExample = debounce(this.updateExample, DEBOUNCE_INPUT);
 
   handleExampleChange = (id, field) => e => {
     const text = e.target.value;
 
-    let body = { field: text };
+    let body = { [field]: text };
     let examples = { ...this.state.examples };
     examples[id][field] = text;
 
     this.setState({ examples });
-    this.debouncedUpdateExample(id, { body });
+    this.debouncedUpdateExample(id, body);
   };
 
   handleExampleDelete = id => e => {

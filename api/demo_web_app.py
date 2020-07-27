@@ -55,10 +55,14 @@ def demo_web_app(gpt, config=UIConfig()):
         example = gpt.get_example(example_id)
         if not example:
             return error("id not found", HTTPStatus.NOT_FOUND)
-        if args.get("input", None):
+
+        if "input" in args:
             example.input = args["input"]
-        if args.get("output", None):
+        if "output" in args:
             example.output = args["output"]
+
+        # update the example
+        gpt.add_example(example)
         return json.dumps(example.as_dict())
 
     def delete_example(example_id):
@@ -96,7 +100,10 @@ def demo_web_app(gpt, config=UIConfig()):
         # pylint: disable=unused-variable
         prompt = request.json["prompt"]
         response = gpt.submit_request(prompt)
-        return {"text": response["choices"][0]["text"][7:]}
+        offset = 0
+        if not gpt.append_output_prefix_to_query:
+            offset = len(gpt.output_prefix)
+        return {'text': response['choices'][0]['text'][offset:]}
 
     subprocess.Popen(["yarn", "start"])
     app.run()
