@@ -109,7 +109,7 @@ class GPT:
 
         return q
 
-    def submit_request(self, prompt):
+    def submit_request(self, prompt, **kwargs):
         """Calls the OpenAI API with the specified parameters."""
         response = openai.Completion.create(engine=self.get_engine(),
                                             prompt=self.craft_query(prompt),
@@ -118,12 +118,13 @@ class GPT:
                                             top_p=1,
                                             n=1,
                                             stream=False,
-                                            stop=self.stop)
+                                            stop=self.stop,
+                                            **kwargs)
         return response
 
-    def get_top_reply(self, prompt):
+    def get_top_reply(self, prompt, **kwargs):
         """Obtains the best result as returned by the API."""
-        response = self.submit_request(prompt)
+        response = self.submit_request(prompt, **kwargs)
         return response['choices'][0]['text']
 
     def format_example(self, ex):
