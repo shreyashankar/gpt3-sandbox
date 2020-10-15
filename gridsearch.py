@@ -45,25 +45,35 @@ param_grid = {
     'temperature': np.linspace(0.0, 1.0, 5),
     'frequency_penalty': np.linspace(0.0, 1.0, 5),
     'presence_penalty': np.linspace(0.0, 1.0, 5),
-    'best_of': np.arange(1, 6)
+    'best_of': np.arange(1, 4)
 }
 
 grid = ParameterGrid(param_grid)
 data = []
 count = 0
 
-def make_request(params):
-    gpt = GPT(max_tokens=700, input_prefix="Q: ", output_prefix="A: ", temperature=params['temperature'].item())
 
-    res = gpt.get_top_reply(params['prompt'], frequency_penalty=params['frequency_penalty'].item(), presence_penalty=params['presence_penalty'].item(), best_of=params['best_of'].item())
+def make_request(params):
+    gpt = GPT(engine='davinci', max_tokens=200, input_prefix="Q: ", output_prefix="A: ",
+              temperature=params['temperature'].item())
+
+    res = gpt.get_top_reply(params['prompt'], frequency_penalty=params['frequency_penalty'].item(
+    ), presence_penalty=params['presence_penalty'].item(), best_of=params['best_of'].item())
 
     # Add to responses
     params['result'] = res.replace("A: ", "")
     return params
 
+
 params_list = [params for params in grid]
 with Pool(POOL_SIZE) as p:
-    data = p.map(make_request, params_list)
+    try:
+        data = p.map(make_request, params_list)
+    except:
+        print("Multiprocessing error")
+        # Create df and dump to csv
+        df = pd.DataFrame(data)
+        df.to_csv('results.csv', index=False)
 
 # Create df and dump to csv
 df = pd.DataFrame(data)
