@@ -39,7 +39,6 @@ with open(os.environ.get(CONFIG_VAR)) as f:
 set_openai_key(env_vars[KEY_NAME])
 
 # Perform grid search
-
 param_grid = {
     'prompt': ["What story can you tell which won't let anyone sleep at night?"],
     'temperature': np.linspace(0.0, 1.0, 5),
@@ -70,10 +69,8 @@ with Pool(POOL_SIZE) as p:
     try:
         data = p.map(make_request, params_list)
     except:
+        # TODO(shreyashankar): make this legit
         print("Multiprocessing error")
-        # Create df and dump to csv
-        df = pd.DataFrame(data)
-        df.to_csv('results.csv', index=False)
 
 # Create df and dump to csv
 df = pd.DataFrame(data)
