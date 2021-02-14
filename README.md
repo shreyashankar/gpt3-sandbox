@@ -85,7 +85,7 @@ The real power of GPT-3 is in its ability to learn to specialize to tasks given 
 >>> set_openai_key(key)
 >>> prompt = "integral from a to b of f of x"
 >>> print(gpt.get_top_reply(prompt))
-output: integral from at to be of f of x
+output: integral from a to be of f of x
 
 >>> gpt.add_example(Example("Two plus two equals four", "2 + 2 = 4"))
 >>> print(gpt.get_top_reply(prompt))
