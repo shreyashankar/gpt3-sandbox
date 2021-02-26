@@ -2,6 +2,8 @@
 
 Initial release date: 19 July 2020
 
+Note that this repository is not under any active development; just basic maintenance.
+
 ## Description
 
 The goal of this project is to enable users to create cool web demos using the newly released OpenAI GPT-3 API **with just a few lines of Python.** 
