@@ -1,9 +1,16 @@
 # OpenAI's GPT-3 to generate SQL from Natural Language!
-## To view the video
-* [Click here](https://youtu.be/9g66yO0Jues)
-* Click on the image below
 
-[![Vanishing Gradient explained using Code!](http://img.youtube.com/vi/9g66yO0Jues/0.jpg)](http://www.youtube.com/watch?v=9g66yO0Jues)
+## To view the video
+
+<table>
+   <tr>
+      <td><a href="http://www.youtube.com/watch?v=9g66yO0Jues" target="_blank"><img height="50" src = "https://img.shields.io/youtube/views/9g66yO0Jues?color=blue&label=Watch%20on%20YouTube&logo=youtube&logoColor=red&style=for-the-badge"></a></td>
+   </tr>
+</table>
+
+or click on the image below
+
+[![OpenAI's GPT-3 to generate SQL from Natural Language!](http://img.youtube.com/vi/9g66yO0Jues/0.jpg)](http://www.youtube.com/watch?v=9g66yO0Jues)
 
 ## Follow Me
 <a href="https://twitter.com/_bhaveshbhatt" target="_blank"><img class="ai-subscribed-social-icon" src="https://bhattbhavesh91.github.io/assets/images/tw.png" width="30"></a>
