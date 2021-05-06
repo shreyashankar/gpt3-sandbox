@@ -43,7 +43,7 @@ class GPT:
     A user can add examples and set parameters of the API request.
     """
     def __init__(self,
-                 engine='davinci',
+                 engine='ada',
                  temperature=0.5,
                  max_tokens=100,
                  input_prefix="input: ",

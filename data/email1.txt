@@ -1,0 +1,13 @@
+Hi {{lead.First Name}}, 
+I have been here at Keap for almost seven years, and I’ve witnessed a recent, rapid rise in innovation and product enhancements. 
+
+Now I’m thrilled to report another exciting innovation that lets you automate your text messaging!
+
+Here’s what you’ll learn during this week’s Automation Hours:
+
+Tuesday, April 05, 2020:
+Automate Your Text Messages with Keap's New Automated SMS—with Renée Boudakian
+Cell phones are always easily within reach, so , it’s no wonder that text messages have an amazing 94% open rate. Renée Boudakian will show you how to turbocharge your communications by adding Keap's new SMS into your marketing and sales automations. That will allow you to connect with leads more consistently and close sales faster!  (Plus, we will share how to get access before anyone else).
+CTA Button: Reserve your spot
+
+Want to focus on the basics first? Check out New Customer Webinars, my daily live webinar series that dramatically eases the Keap startup process.

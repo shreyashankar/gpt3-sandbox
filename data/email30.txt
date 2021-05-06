@@ -1,0 +1,19 @@
+Hey {{lead.First Name}}, 
+You’ve worked so hard to capture your leads, but if you’re like most businesses, you stop following up after about 2-3 attempts. 
+
+This week we have two webinar sessions to make it easy to add 7 touches to your outreach and also make sure that they never miss a new blog post.
+
+Here’s what you can learn during this week’s Automation Hours:
+
+Tuesday, November 10, 2020:
+Use Short Term Nurture Campaigns to Successfully Convert More Prospects to Customers—with Renée Boudakian
+It typically takes somewhere between 7-12 touches to convert a stranger to a customer, although most businesses give up after only 1 or 2 outreach attempts. To make sure you never let another lead slip through the cracks without nurturing them, we'll show you how to automate those touches with a swipe and deploy email copy to maximize your chance of success. This is more than just a drip campaign, it's automation!
+
+Thursday, November 12, 2020:  
+Using API to Notify Contacts About New Blog Posts—with Anthony Cassara
+You put a lot of effort into writing your newest blog post. Now, you need to get people to read it. In this session, Anthony helps you understand our API and how to leverage it to automatically send that post out to your audience every time you publish.
+
+CTA Button: Register Now
+
+Have you reserved your spot for IKON 2020? Join us for the only event exclusively focused on maximizing your Keap and Infusionsoft experience. Reserve your spot.
+

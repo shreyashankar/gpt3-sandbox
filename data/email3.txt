@@ -1,0 +1,14 @@
+Hi {{lead.First Name}}, 
+One thing that has been on my ‘to do list’ for years was to create a course for my personal blog. However, I always thought it would take too much work to create an entire membership site.
+
+Now I’ve discovered some wonderful 3rd party partners of ours who make the processes easier and  help you set up your first great version in less than a day!
+
+Here’s what you’ll learn during this week’s Automation Hours:
+
+Thursday, April 07, 2020:
+Using Landing Pages to Deliver Member Content—with Michelle Bell
+Not quite ready to build your membership site yet but still want to deliver paid content? Not a problem—landing pages are a perfect solution. 
+
+CTA Button: Reserve your spot
+
+If you want to focus on the basics first,  check out New Customer Webinars, my daily live webinar series that dramatically eases the Keap startup process. 
