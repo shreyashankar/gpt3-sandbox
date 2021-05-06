@@ -2,6 +2,8 @@
 *.cfg
 *venv*
 
+/.idea
+
 *pycache*
 
 # dependencies

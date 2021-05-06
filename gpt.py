@@ -44,8 +44,8 @@ class GPT:
     """
     def __init__(self,
                  engine='ada',
-                 temperature=0.5,
-                 max_tokens=100,
+                 temperature=0.2,
+                 max_tokens=25,
                  input_prefix="input: ",
                  input_suffix="\n",
                  output_prefix="output: ",
@@ -116,6 +116,7 @@ class GPT:
                                             max_tokens=self.get_max_tokens(),
                                             temperature=self.get_temperature(),
                                             top_p=1,
+                                            # best_of=5,  # expensive
                                             n=1,
                                             stream=False,
                                             stop=self.stop)
