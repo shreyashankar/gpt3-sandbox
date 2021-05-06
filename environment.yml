@@ -1,0 +1,8 @@
+name: gpt-sandbod
+channels:
+  - defaults
+dependencies:
+  - python=3.7.2
+  - pip
+  - pip:
+      - -r file:requirements.txt
