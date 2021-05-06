@@ -14,3 +14,4 @@ requests==2.24.0
 six==1.15.0
 urllib3==1.25.9
 Werkzeug==1.0.1
+google-cloud-storage==1.38.0

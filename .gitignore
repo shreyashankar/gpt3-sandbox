@@ -2,6 +2,8 @@
 *.cfg
 *venv*
 
+/.idea
+
 *pycache*
 
 # dependencies
@@ -14,6 +16,8 @@
 
 # production
 /build
+
+/dev_box
 
 # misc
 .DS_Store

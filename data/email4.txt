@@ -1,0 +1,20 @@
+Hi {{lead.First Name}}, 
+When I was a small business owner I remember how frustrating appointment setting would be. I would leave leads voicemails offering a time to meet. Later, they would call back and leave a voicemail asking for a different time. I’d call back and say (again via voicemail) that the time wouldn’t work and suggest yet another option.
+
+Most leads never hear that last email, they’re already moved on and hired someone else. Slow follow-up and irritating appointment setting are a recipe for lost sales. 
+
+Join me to learn how you can take the pain out of appointments and convert more leads in this week’s Automation Hours:
+
+
+
+Tuesday, April 13, 2020:
+Make Meeting Easy with Keap Appointments—with Mike Hilton
+Reduce friction in the scheduling process by offering online scheduling that connects to Zoom. Then follow up with your attendees to make sure they have everything they need for a productive connection. We will leverage both Keap's Appointments and some third party options you might consider. (Lite, Pro, Max, Max Classic)
+
+Thursday, April 15, 2020:
+Tips for Troubleshooting Keap—with Jillian Kendrick
+If you've ever found yourself ready to throw your computer across the room... you're not alone! And to make sure it doesn't happen again, I'm going to show you a few ninja tricks I've learned over the last 8+ years of using Keap that can save you a TON of time when it comes to troubleshooting, figuring things out, where to go, what to look for, etc. Bring your tough questions and we'll walk through them together!  (Lite, Pro, Max, Max Classic)
+
+CTA Button: Reserve your spot
+
+Want to focus on the basics first? Check out New Customer Webinars, my daily live webinar series that dramatically eases the Keap startup process. 
