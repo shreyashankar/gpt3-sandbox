@@ -12,5 +12,5 @@ pylint==2.5.3
 python-dotenv==0.14.0
 requests==2.24.0
 six==1.15.0
-urllib3==1.25.9
+urllib3==1.26.5
 Werkzeug==1.0.1
