@@ -22,7 +22,7 @@ def demo_web_app(gpt, config=UIConfig()):
     try:
         app.config.from_envvar(CONFIG_VAR)
         set_openai_key(app.config[KEY_NAME])
-    except FileNotFoundError:    
+    except (FileNotFoundError,RuntimeError) as e:
         set_openai_key(str(os.environ.get('OPENAI_KEY')))
 
     @app.route("/params", methods=["GET"])
