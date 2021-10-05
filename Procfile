@@ -1,1 +1,1 @@
-web: python examples/essay_grader.py
+web: gunicorn api/essay_app:app
