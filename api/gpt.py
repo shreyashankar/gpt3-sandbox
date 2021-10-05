@@ -50,7 +50,8 @@ class GPT:
                  input_suffix="\n",
                  output_prefix="output: ",
                  output_suffix="\n\n",
-                 append_output_prefix_to_query=False):
+                 append_output_prefix_to_query=False,
+                 ):
         self.examples = {}
         self.engine = engine
         self.temperature = temperature
@@ -61,6 +62,7 @@ class GPT:
         self.output_suffix = output_suffix
         self.append_output_prefix_to_query = append_output_prefix_to_query
         self.stop = (output_suffix + input_prefix).strip()
+
 
     def add_example(self, ex):
         """Adds an example to the object.
@@ -131,3 +133,47 @@ class GPT:
         return self.input_prefix + ex.get_input(
         ) + self.input_suffix + self.output_prefix + ex.get_output(
         ) + self.output_suffix
+
+class GPT3_FineTuned(GPT):
+    def __init__(self,
+                model = None,
+                temperature=0.5,
+                max_tokens=10,
+                input_prefix="",
+                input_suffix="\n\n###\n\n",
+                output_prefix="",
+                output_suffix="\n\n###\n\n",
+                append_output_prefix_to_query=False,
+                ):
+
+        if model is None:
+            raise ValueError("Please specify your finetuned model id")
+
+        self.examples = {}
+        self.model = model
+        self.temperature = temperature
+        self.max_tokens = max_tokens
+        self.input_prefix = input_prefix
+        self.input_suffix = input_suffix
+        self.output_prefix = output_prefix
+        self.output_suffix = output_suffix
+        self.append_output_prefix_to_query = append_output_prefix_to_query
+        self.stop = (output_suffix + input_prefix).strip()
+
+    def get_model(self):
+        """Returns the engine specified for the API."""
+        return self.model
+
+    def submit_request(self, prompt):
+        """Calls the OpenAI API with the specified parameters."""
+        response = openai.Completion.create(model=self.get_model(),
+                                            prompt=self.craft_query(prompt),
+                                            max_tokens=self.get_max_tokens(),
+                                            temperature=self.get_temperature(),
+                                            top_p=1,
+                                            n=1,
+                                            stream=False,
+                                            stop=self.stop)
+
+        print(f'prompt: {self.craft_query(prompt)}')
+        return response

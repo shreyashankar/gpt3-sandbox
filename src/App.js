@@ -106,9 +106,9 @@ class App extends React.Component {
               margin: "auto",
               marginTop: "80px",
               display: "block",
-              maxWidth: "500px",
+              maxWidth: "1000px",
               minWidth: "200px",
-              width: "50%"
+              width: "50%",
             }}
           >
             <Form onSubmit={this.handleClick}>
@@ -125,7 +125,7 @@ class App extends React.Component {
                           <Form.Label column="sm" lg={2}>
                             Example Input
                           </Form.Label>
-                          <Col sm={10}>
+                          <Col sm={20} >
                             <Form.Control
                               type="text"
                               as="input"

@@ -12,6 +12,7 @@ from .ui_config import UIConfig
 
 CONFIG_VAR = "OPENAI_CONFIG"
 KEY_NAME = "OPENAI_KEY"
+MODEL_NAME = "MODEL"
 
 
 def demo_web_app(gpt, config=UIConfig()):
@@ -103,7 +104,11 @@ def demo_web_app(gpt, config=UIConfig()):
         offset = 0
         if not gpt.append_output_prefix_to_query:
             offset = len(gpt.output_prefix)
-        return {'text': response['choices'][0]['text'][offset:]}
 
-    subprocess.Popen(["yarn", "start"])
+        response = {'text': response['choices'][0]['text'][offset:]}
+        print(f'Response received:{response}')
+        return response
+
+    #subprocess.Popen(["yarn", "start"])
+    subprocess.Popen(["yarn", "start"], shell=True)
     app.run()
