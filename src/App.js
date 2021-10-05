@@ -137,6 +137,7 @@ class App extends React.Component {
                               )}
                             />
                           </Col>
+                          
                         </Form.Group>
                         <Form.Group
                           as={Row}
@@ -191,6 +192,7 @@ class App extends React.Component {
                   as="textarea"
                   placeholder="Enter text"
                   value={this.state.input}
+                  style = {{ height:'400px' }}
                   onChange={this.handleInputChange}
                 />
               </Form.Group>
