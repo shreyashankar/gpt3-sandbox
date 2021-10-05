@@ -5,7 +5,7 @@ import json
 import subprocess
 import openai
 
-from flask import Flask, request, Response
+from flask import Flask, request, Response, send_from_directory
 
 from .gpt import set_openai_key, Example
 from .ui_config import UIConfig
@@ -114,8 +114,13 @@ def essay_app(gpt, config=UIConfig()):
         print(f'Response received:{response}')
         return response
 
+    @app.route('/')
+    def serve():
+        return send_from_directory(app.static_folder, 'index.html')
 
-app = Flask(__name__)
+
+app = Flask(__name__,
+    static_folder='../build',static_url_path='')
 
 demo = False
 model = "curie:ft-user-mkdwhtbbymt0rzgay0sqg9d4-2021-10-04-12-15-36"
@@ -128,7 +133,7 @@ config = UIConfig(description= "Write your essay here",
 essay_app(gpt, config=config)
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host='0.0.0.0')
 
 
 # if os.name == 'nt':
