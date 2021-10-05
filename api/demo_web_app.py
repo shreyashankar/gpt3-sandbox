@@ -9,7 +9,7 @@ from flask import Flask, request, Response
 
 from .gpt import set_openai_key, Example
 from .ui_config import UIConfig
-
+import os 
 CONFIG_VAR = "OPENAI_CONFIG"
 KEY_NAME = "OPENAI_KEY"
 MODEL_NAME = "MODEL"
@@ -19,8 +19,11 @@ def demo_web_app(gpt, config=UIConfig()):
     """Creates Flask app to serve the React app."""
     app = Flask(__name__)
 
-    app.config.from_envvar(CONFIG_VAR)
-    set_openai_key(app.config[KEY_NAME])
+    try:
+        app.config.from_envvar(CONFIG_VAR)
+        set_openai_key(app.config[KEY_NAME])
+    except FileNotFoundError:    
+        set_openai_key(str(os.environ.get('OPENAI_KEY')))
 
     @app.route("/params", methods=["GET"])
     def get_params():
@@ -109,6 +112,8 @@ def demo_web_app(gpt, config=UIConfig()):
         print(f'Response received:{response}')
         return response
 
-    subprocess.Popen(["yarn", "start"])
-    #subprocess.Popen(["yarn", "start"], shell=True)
+    if os.name == 'nt':
+        subprocess.Popen(["yarn", "start"], shell=True)
+    else:
+        subprocess.Popen(["yarn", "start"])
     app.run()
