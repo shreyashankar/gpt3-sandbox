@@ -1,1 +1,1 @@
-worker: python examples/essay_grader.py
+web: python examples/essay_grader.py
