@@ -1,0 +1,1 @@
+worker: python examples/essay_grader.py

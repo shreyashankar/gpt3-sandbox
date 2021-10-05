@@ -109,6 +109,6 @@ def demo_web_app(gpt, config=UIConfig()):
         print(f'Response received:{response}')
         return response
 
-    #subprocess.Popen(["yarn", "start"])
-    subprocess.Popen(["yarn", "start"], shell=True)
+    subprocess.Popen(["yarn", "start"])
+    #subprocess.Popen(["yarn", "start"], shell=True)
     app.run()
