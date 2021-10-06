@@ -1,3 +1,4 @@
+airtable-python-wrapper==0.15.3
 astroid==2.4.2
 certifi==2020.6.20
 chardet==3.0.4
@@ -28,5 +29,6 @@ six==1.15.0
 toml==0.10.2
 tqdm==4.62.3
 urllib3==1.25.11
+waitress==2.0.0
 Werkzeug==1.0.1
 wrapt==1.12.1
