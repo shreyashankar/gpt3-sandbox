@@ -8,7 +8,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 const UI_PARAMS_API_URL = "/params";
 const TRANSLATE_API_URL = "/translate";
 const EXAMPLE_API_URL = "/examples";
-
+const RECORD_API_URL = "/record"
 const DEBOUNCE_INPUT = 250;
 
 class App extends React.Component {
@@ -20,11 +20,16 @@ class App extends React.Component {
       buttonText: "Submit",
       description: "Description",
       showExampleForm: false,
-      examples: {}
+      examples: {},
+      currentDateTime: Date().toLocaleString(),
+      demoID: "TESTID",
+      recorded: "",
+      sa_score: 11
     };
     // Bind the event handlers
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    
   }
 
   componentDidMount() {
@@ -85,14 +90,23 @@ class App extends React.Component {
     this.setState({ input: e.target.value });
   }
 
-  handleClick(e) {
+  async handleClick(e) {
     e.preventDefault();
     let body = {
       prompt: this.state.input
     };
-    axios.post(TRANSLATE_API_URL, body).then(({ data: { text } }) => {
+    await axios.post(TRANSLATE_API_URL, body).then(({ data: { text } }) => {
       this.setState({ output: text });
     });
+
+    let postBody = {
+      demoID: this.state.demoID,
+      essay: this.state.input,
+      ml_score: parseInt(this.state.output),
+      sa_score: this.state.sa_score
+    };
+    const response = await axios.post(RECORD_API_URL, postBody);
+    //this.setState({recorded: "True"})
   }
 
   render() {
@@ -209,6 +223,15 @@ class App extends React.Component {
               }}
             >
               {this.state.output}
+            </div>
+            <div
+              style={{
+                textAlign: "center",
+                margin: "20px",
+                fontSize: "12pt"
+              }}
+            >
+              {this.state.recorded}
             </div>
           </div>
         </body>

@@ -10,7 +10,8 @@ from flask import Flask, request, Response, send_from_directory
 from .gpt import set_openai_key, Example
 from .ui_config import UIConfig
 import os, sys
-from api import GPT, Example, UIConfig, GPT3_FineTuned 
+from api import GPT, Example, UIConfig, GPT3_FineTuned
+from api.essay_airtable import insert_record
 
 CONFIG_VAR = "OPENAI_CONFIG"
 KEY_NAME = "OPENAI_KEY"
@@ -118,6 +119,13 @@ def essay_app(gpt, config=UIConfig()):
     def serve():
         return send_from_directory(app.static_folder, 'index.html')
 
+    @app.route("/record", methods=["POST"])
+    def record():
+        body = request.json
+        vals = body.values()
+        print(f'body teehee: {body}')
+        response = insert_record(vals)
+        return response
 
 app = Flask(__name__,
     static_folder='../build',static_url_path='')
@@ -135,10 +143,3 @@ essay_app(gpt, config=config)
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
 
-
-# if os.name == 'nt':
-#     subprocess.Popen(["yarn", "start"], shell=True)
-# else:
-#     subprocess.Popen(["yarn", "start"])
-
-    
