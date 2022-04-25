@@ -21,7 +21,7 @@ Once the `GPT` object is created, you need to "prime" it with several examples. 
 ```
 from api import Example
 
-ex = Example(input="Hello", output="Hola")
+ex = Example(inp="Hello", out="Hola")
 ```
 
 After constructing some examples, you can add them to your `GPT` object by calling the `add_example` method, which only accepts an `Example`:
