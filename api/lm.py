@@ -32,10 +32,10 @@ class Example:
         }
 
 
-class GPT:
-    """The main class for a user to interface with the OpenAI API.
+class LanguageModel:
+    """The main class for a user to interface with the OpenAI API or a Huggingface language model (LM).
 
-    A user can add examples and set parameters of the API request.
+    A user can add examples and set parameters of the API request/LM inference.
     """
 
     def __init__(
@@ -47,6 +47,7 @@ class GPT:
         input_suffix="\n",
         output_prefix="output: ",
         output_suffix="\n\n",
+        preamble="",
         append_output_prefix_to_query=False,
     ):
         self.examples = {}
@@ -57,6 +58,7 @@ class GPT:
         self.input_suffix = input_suffix
         self.output_prefix = output_prefix
         self.output_suffix = output_suffix
+        self.preamble = preamble
         self.append_output_prefix_to_query = append_output_prefix_to_query
         self.stop = (output_suffix + input_prefix).strip()
 
@@ -99,7 +101,13 @@ class GPT:
 
     def craft_query(self, prompt):
         """Creates the query for the API request."""
-        q = self.get_prime_text() + self.input_prefix + prompt + self.input_suffix
+        q = (
+            self.preamble
+            + self.get_prime_text()
+            + self.input_prefix
+            + prompt
+            + self.input_suffix
+        )
         if self.append_output_prefix_to_query:
             q = q + self.output_prefix
 

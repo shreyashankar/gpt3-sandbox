@@ -7,7 +7,8 @@ import openai
 
 from flask import Flask, request, Response
 
-from .gpt import set_openai_key, Example
+from .gpt import set_openai_key
+from .lm import Example
 from .ui_config import UIConfig
 
 CONFIG_VAR = "OPENAI_CONFIG"
