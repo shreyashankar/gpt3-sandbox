@@ -36,3 +36,7 @@
     transform: rotate(360deg);
   }
 }
+
+#loading {
+  margin-left: 5px;
+}
