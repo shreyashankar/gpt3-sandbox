@@ -20,7 +20,7 @@ class App extends React.Component {
       buttonText: "Submit",
       description: "Description",
       showExampleForm: false,
-      examples: {}
+      examples: {},
     };
     // Bind the event handlers
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -33,13 +33,13 @@ class App extends React.Component {
       .get(UI_PARAMS_API_URL)
       .then(
         ({
-          data: { placeholder, button_text, description, show_example_form }
+          data: { placeholder, button_text, description, show_example_form },
         }) => {
           this.setState({
             input: placeholder,
             buttonText: button_text,
             description: description,
-            showExampleForm: show_example_form
+            showExampleForm: show_example_form,
           });
           if (this.state.showExampleForm) {
             axios.get(EXAMPLE_API_URL).then(({ data: examples }) => {
@@ -48,6 +48,8 @@ class App extends React.Component {
           }
         }
       );
+    const load = document.getElementById("loading");
+    load.style.visibility = "visible";
   }
 
   updateExample(id, body) {
@@ -56,7 +58,7 @@ class App extends React.Component {
 
   debouncedUpdateExample = debounce(this.updateExample, DEBOUNCE_INPUT);
 
-  handleExampleChange = (id, field) => e => {
+  handleExampleChange = (id, field) => (e) => {
     const text = e.target.value;
 
     let body = { [field]: text };
@@ -67,14 +69,14 @@ class App extends React.Component {
     this.debouncedUpdateExample(id, body);
   };
 
-  handleExampleDelete = id => e => {
+  handleExampleDelete = (id) => (e) => {
     e.preventDefault();
     axios.delete(`${EXAMPLE_API_URL}/${id}`).then(({ data: examples }) => {
       this.setState({ examples });
     });
   };
 
-  handleExampleAdd = e => {
+  handleExampleAdd = (e) => {
     e.preventDefault();
     axios.post(EXAMPLE_API_URL).then(({ data: examples }) => {
       this.setState({ examples });
@@ -87,11 +89,14 @@ class App extends React.Component {
 
   handleClick(e) {
     e.preventDefault();
+    const load = document.getElementById("loading");
+    load.style.visibility = "visible";
     let body = {
-      prompt: this.state.input
+      prompt: this.state.input,
     };
     axios.post(TRANSLATE_API_URL, body).then(({ data: { text } }) => {
       this.setState({ output: text });
+      load.style.visibility = "hidden";
     });
   }
 
@@ -108,7 +113,7 @@ class App extends React.Component {
               display: "block",
               maxWidth: "500px",
               minWidth: "200px",
-              width: "50%"
+              width: "50%",
             }}
           >
             <Form onSubmit={this.handleClick}>
@@ -116,7 +121,7 @@ class App extends React.Component {
                 {showExampleForm && (
                   <div>
                     <h4 style={{ marginBottom: "25px" }}>Examples</h4>
-                    {Object.values(this.state.examples).map(example => (
+                    {Object.values(this.state.examples).map((example) => (
                       <span key={example.id}>
                         <Form.Group
                           as={Row}
@@ -198,12 +203,19 @@ class App extends React.Component {
               <Button variant="primary" type="submit">
                 {this.state.buttonText}
               </Button>
+              <div
+                class="spinner-border spinner-border-sm text-primary"
+                role="status"
+                id="loading"
+              >
+                <span class="sr-only">Loading...</span>
+              </div>
             </Form>
             <div
               style={{
                 textAlign: "center",
                 margin: "20px",
-                fontSize: "18pt"
+                fontSize: "18pt",
               }}
             >
               {this.state.output}
