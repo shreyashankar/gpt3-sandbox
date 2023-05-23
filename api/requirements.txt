@@ -10,7 +10,7 @@ MarkupSafe==1.1.1
 openai==0.2.4
 pylint==2.5.3
 python-dotenv==0.14.0
-requests==2.27.1
+requests==2.31.0
 six==1.15.0
 urllib3==1.26.5
 Werkzeug==2.2.3
